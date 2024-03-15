@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+
+  "profiles": {
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false, 
+      "launchUrl": "https://localhost:7011/swagger/index.html //I dont think this url used at all and comments aren't allowed here",
+      "applicationUrl": "https://localhost:7011",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": false,
+      "launchUrl": "swagger//I dont think this url used at all and comments aren't allowed here. https profile 'extends' IISExpress. if duplicate values, IISExpress values take priority",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "hotReloadProfile": "aspnetcore"
+    }
+  }
+}
