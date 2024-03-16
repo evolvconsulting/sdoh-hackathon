@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class PatientRiskLevel
+public partial class PatientRiskLevel : IIdentified
 {
     public string Id { get; set; } = null!;
 
