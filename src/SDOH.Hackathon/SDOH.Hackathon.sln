@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Provider", "Portal.Provider\Portal.Provider.csproj", "{AB4BE182-5B51-4AFA-A148-58D80F6FE717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Provider", "Portal.Provider\Portal.Provider.csproj", "{AB4BE182-5B51-4AFA-A148-58D80F6FE717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Patient", "Portal.Patient\Portal.Patient.csproj", "{C0522130-2AAC-43A8-8EA2-F8068B4F6362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Patient", "Portal.Patient\Portal.Patient.csproj", "{C0522130-2AAC-43A8-8EA2-F8068B4F6362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Components", "Portal.Components\Portal.Components.csproj", "{CBCD5AFB-89FC-4AFE-8459-B81C0AA85FAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Components", "Portal.Components\Portal.Components.csproj", "{CBCD5AFB-89FC-4AFE-8459-B81C0AA85FAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
