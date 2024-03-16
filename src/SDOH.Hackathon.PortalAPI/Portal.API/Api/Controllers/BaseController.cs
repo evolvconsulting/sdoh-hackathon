@@ -36,9 +36,6 @@ namespace dotnet8.Controllers
         public IActionResult GetAll()
         {
             var result = _context.Set<T>().AsEnumerable();
-            var asdf = this.HttpContext.User;
-            var apiaccess = asdf.IsInRole("demo-api-default-api-access");
-            //var bsdf = asdf.Pol
             return Ok(result);
         }
 
