@@ -20,10 +20,6 @@ public partial class ScaffoldedContext : DbContext
 
     public virtual DbSet<Patient> Patients { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSnowflake("account=LRB04982;host=aovnged-evolv_health.snowflakecomputing.com;user=SVC_EVOLV_SDOH;password=pUB+^ONZrg<w{[6%95Aa;db=EVOLV_SDOH;schema=PUBLIC;warehouse=COMPUTE_WH");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("PUBLIC");
