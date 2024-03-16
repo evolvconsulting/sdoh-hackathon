@@ -1,0 +1,66 @@
+﻿@page "/SuggestedInterventions"
+
+<PageTitle>Suggested Interventions</PageTitle>
+<MudCard Outlined="true">
+    <MudCardContent>
+    You have been recognized as a high risk COPD patient.
+
+    Here are your recommended interventions
+    </MudCardContent>
+</MudCard>
+
+
+<MudCarousel Class="mud-m-6" Style="height:400px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="false" TData="object">
+    <MudCarouselItem Transition="transition" Color="@Color.Primary">
+        <div class="d-flex" style="height:100%">
+            <MudCard Outlined="true">
+                <h2>Home Oxygen Therapy</h2>
+                <h3>Description: </h3>
+                <MudText>
+                    Your body can’t live without the oxygen you breathe in from the air. But if you have lung disease or other medical conditions, you may not get enough of it. That can leave you short of breath and cause problems with your heart, brain, and other parts of your body.
+                </MudText>
+                <div style="text-align: center;">
+                    <MudButton>
+                        Enroll
+                    </MudButton>
+                </div>
+            </MudCard>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem Transition="transition" Color="@Color.Secondary">
+        <div class="d-flex" style="height:100%">
+            <MudCard Outlined="true">
+                <h2>Smoking Cessation Program</h2>
+                <h3>Description: </h3>
+                <MudText>
+                    Smoking is the leading cause of COPD, and quitting smoking is essential in managing the disease and preventing further deterioration of lung function. Smoking cessation programs provide support, counseling, and resources to help individuals quit smoking successfully. These programs may offer behavioral interventions, pharmacotherapy (such as nicotine replacement therapy or prescription medications), and ongoing support to address nicotine addiction and related challenges.
+                </MudText>
+                <div style="text-align: center;">
+                    <MudButton>
+                        Enroll
+                    </MudButton>
+                </div>
+            </MudCard>
+        </div>
+    </MudCarouselItem>
+    <MudCarouselItem Transition="transition">
+        <div class="d-flex" style="height:100%">
+            <MudCard Outlined="true">
+                <h2>Disease Management Program</h2>
+                <h3>Description: </h3>
+                <MudText>
+                    Disease management programs provide ongoing support and coordination of care for individuals with chronic conditions like COPD.
+                </MudText>
+                <div style="text-align: center;">
+                    <MudButton>
+                        Enroll
+                    </MudButton>
+                </div>
+            </MudCard>
+        </div>
+    </MudCarouselItem>
+</MudCarousel>
+
+@code {
+    private Transition transition = Transition.Slide;
+}
