@@ -21,6 +21,7 @@ namespace Portal.Provider
 
             builder.Services.AddSingleton<IRepository<Patient>, PatientRepository>();
             builder.Services.AddSingleton<IDataService<Patient>, PatientDataService>();
+            builder.Services.AddSingleton<AppBarService>();
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             await builder.Build().RunAsync();

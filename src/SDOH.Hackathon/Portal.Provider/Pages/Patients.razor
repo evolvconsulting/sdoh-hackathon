@@ -4,41 +4,51 @@
 @inject NavigationManager Navigation
 
 <MudStack Style="margin: 20px">
-    <MudText Typo="Typo.h4">Patients</MudText>
-    
-    <MudAutocomplete T="string" Label="Search" @bind-Value="PatientName" SearchFunc="@PatientNameSearch"
+    <MudAutocomplete T="string" Label="Search" @bind-Value="FilteredPatientName" SearchFunc="@PatientNameSearch"
                      ResetValueOnEmptyText="@resetValueOnEmptyText"
                      CoerceText="@coerceText" CoerceValue="@coerceValue"
-                     AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" />
-    
-    <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Style="height: 400px; overflow-y: scroll">
-        <MudList Clickable="true">
+                     AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" IconSize="Size.Large" Clearable="true"/>
 
+    <MudPaper Class="d-flex flex-column overflow-x-auto " Height="calc(100vh - 170px)">
+        <MudList Clickable="true">
             @if (PatientList != null) {
-                foreach (var patient in PatientList) {
+
+                var filteredList = PatientList;
+
+                if (!string.IsNullOrWhiteSpace(FilteredPatientName))
+                {
+                    var result = PatientList.Where(patient => $"{patient.LastName}, {patient.FirstName} {patient.MiddleInitial}.".Contains(FilteredPatientName)).ToList();
+
+                    if (result != null && result.Count > 0)
+                        filteredList = result;
+                }
+
+                foreach (var patient in filteredList)
+                {
 
                     <MudListItem OnClick="@(() => Navigation.NavigateTo($"/patients/{patient.Id}"))">
-                        <MudText Typo="Typo.h6">@($"{patient.LastName}, {patient.FirstName} {patient.MiddleInitial}.")</MudText>
-                        <MudStack Row=true>
-                            <MudChip Color="Color.Default">@($"DOB: {@patient.DateOfBirth.ToString("MM/dd/yyyy")}")</MudChip>
+                        <MudStack Spacing="4">
+                            <MudText Typo="Typo.h4">@($"{patient.LastName}, {patient.FirstName} {patient.MiddleInitial}.")</MudText>
+                            <MudStack Spacing="8" Row=true>
+                                <MudChip Size="Size.Large" Color="Color.Default" Style="font-size:25px">@($"DOB: {@patient.DateOfBirth.ToString("MM/dd/yyyy")}")</MudChip>
 
-                            @if (patient.Interventions.Count == 0)
-                            {
-                                <MudChip Color="Color.Success">0 Interventions to Review </MudChip>
-                            }
-                            else
-                            {
-                                <MudChip Color="Color.Error">@($"{patient.Interventions.Count} Interventions to Review")</MudChip>
-                            }
+                                @if (patient.Interventions.Count == 0)
+                                {
+                                    <MudChip Size="Size.Large" Color="Color.Success" Style="font-size:25px">0 Interventions to Review </MudChip>
+                                }
+                                else
+                                {
+                                    <MudChip Size="Size.Large" Color="Color.Error" Style="font-size:25px">@($"{patient.Interventions.Count} Interventions to Review")</MudChip>
+                                }
 
-                            <MudChip Color="Color.Info">@patient.RiskLevel</MudChip>
+                                <MudChip Size="Size.Large" Color="Color.Info" Style="font-size:25px">@patient.RiskLevel</MudChip>
+                            </MudStack>
                         </MudStack>
-                        
                     </MudListItem>
                     <MudDivider/>
                 }
             }
         </MudList>
-    </MudContainer>
+    </MudPaper>
 
 </MudStack>
