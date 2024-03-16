@@ -8,8 +8,6 @@ public partial class PatientIntervention : IIdentified
 {
     public string Id { get; set; } = null!;
 
-    public string PatientInterventionId { get; set; } = null!;
-
     public string? PatientId { get; set; }
 
     public string? StatusId { get; set; }

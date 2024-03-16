@@ -1,7 +1,9 @@
 
 namespace dotnet8.Services;
 
+using System.Text.Json;
 using Data;
+using Data.Models;
 using WebPush;
 
 public sealed class NotificationService
@@ -30,7 +32,12 @@ public sealed class NotificationService
         var webPushClient = new WebPushClient();
 
         try {
-            await webPushClient.SendNotificationAsync(pushSubscription, message);
+            var payload = JsonSerializer.Serialize(new
+            {
+                message
+            });
+
+            await webPushClient.SendNotificationAsync(pushSubscription, payload);
         } catch(Exception ex) {
             _logger.LogError(ex, "Error occured while attempting to push notification");
         }

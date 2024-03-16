@@ -5,6 +5,8 @@ namespace Portal.Patient.Services
     public interface INotificationService
     {
         public IEnumerable<INotification> GetForCurrentUser();
+
+        public Task Subscribe();
     }
 
 }

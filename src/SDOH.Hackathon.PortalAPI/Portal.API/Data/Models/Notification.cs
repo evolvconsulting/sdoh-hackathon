@@ -8,8 +8,6 @@ public partial class Notification : IIdentified
 {
     public string Id { get; set; } = null!;
 
-    public string NotificationId { get; set; } = null!;
-
     public string PatientId { get; set; } = null!;
 
     public string? Message { get; set; }
