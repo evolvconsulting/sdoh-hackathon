@@ -9,9 +9,9 @@
         @foreach (var notification in NewNotifications)
         {
             var hasLink = NotificationLinkByTypeID.ContainsKey(notification.NotificationTypeID);
-            <MudListItem Href="@(hasLink ? NotificationLinkByTypeID[notification.NotificationTypeID] : "#")" Class="align-content-center">
+            <MudListItem Class="align-content-center" Href="@(hasLink ? NotificationLinkByTypeID[notification.NotificationTypeID] : "#")">
                 @notification.Message
-                <MudIcon hidden="@(!hasLink)" Class="justify-end" Icon="@Icons.Material.Filled.ChevronRight"></MudIcon>
+                <MudIcon hidden="@(!hasLink)" Class="justify-end" Style="float:right" Icon="@Icons.Material.Filled.ChevronRight"></MudIcon>
             </MudListItem>
             <MudDivider />
         }
