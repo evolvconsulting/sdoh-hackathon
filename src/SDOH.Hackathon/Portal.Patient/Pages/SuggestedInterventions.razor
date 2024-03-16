@@ -1,0 +1,30 @@
+﻿@page "/SuggestedInterventions"
+
+<PageTitle>Suggested Interventions</PageTitle>
+<MudCard Outlined="true">
+    <MudCardContent>
+    You have been recognized as a high risk COPD patient.
+
+    Here are your recommended interventions
+    </MudCardContent>
+</MudCard>
+
+
+<MudCarousel Class="mt-4" Style="height:400px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="false" TData="object">
+    @foreach (var intervention in _interventions)
+    {
+        <MudCarouselItem Transition="DefaultTransition">
+            <div class="d-flex" style="height:100%; width: 100%">
+                <MudCard Outlined="true" Class="px-11 pt-4">
+                    <MudText Typo="Typo.h4">@intervention.Name</MudText>
+                    <MudText>@intervention.Description</MudText>
+                    <div Class="d-flex justify-center"> 
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary">
+                            Enroll
+                        </MudButton>
+                    </div>
+                </MudCard>
+            </div>
+        </MudCarouselItem>
+    }
+</MudCarousel>

@@ -26,6 +26,7 @@ namespace Portal.Patient.Pages
         {
             _newNotifications = _notificationService.GetForCurrentUser();
             //AppBarService.SetSettings(PageName, true, "/patients");
+            base.OnInitialized();
         }
     }
 }
