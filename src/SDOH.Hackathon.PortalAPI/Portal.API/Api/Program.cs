@@ -62,7 +62,7 @@ builder.Services.AddHttpClient();
 string keyVaultName = builder.Configuration["keyVaultName"];
 var client = new SecretClient(new Uri($"https://{keyVaultName}.vault.azure.net"), new DefaultAzureCredential());
 var secret = client.GetSecret( builder.Configuration["SnowflakeDbSecretName"]).Value.Value; //this is how the offical azure keyvault package requires you to get a secret. kind of funny
-var connectionString = $"account=YOUR_ACCOUNT;host=UR_HOST.us-east-1.snowflakecomputing.com;user=UR_USER;password={secret};db=TESTDB;schema=PUBLIC;warehouse=UR_WAREHOUSE";
+var connectionString = $"account=LRB04982;host=LRB04982.AWS_US_WEST_2.snowflakecomputing.com;user=SVC_EVOLV_SDOH;password={secret};db=EVOLV_SDOH;schema=PUBLIC;warehouse=COMPUTE_WH";
 
 builder.Services.AddDbContext<Data.Context>(options => options.UseSnowflake(connectionString));
 X509Certificate2 certificate = new X509Certificate2("KeyCloakRealm.Public.crt");
