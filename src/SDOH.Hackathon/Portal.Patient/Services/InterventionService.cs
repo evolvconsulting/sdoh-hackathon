@@ -12,16 +12,19 @@ namespace Portal.Patient.Services
             return new List<IIntervention>
             {
                 new Intervention {
+                    ID = 1,
                     Name = "Home Oxygen Therapy",
                     Description = "Your body can’t live without the oxygen you breathe in from the air. But if you have lung disease or other medical conditions, you may not get enough of it. That can leave you short of breath and cause problems with your heart, brain, and other parts of your body."
                 },
                 new Intervention
                 {
+                    ID = 2,
                     Name = "Smoking Cessation Program",
                     Description = "Smoking is the leading cause of COPD, and quitting smoking is essential in managing the disease and preventing further deterioration of lung function. Smoking cessation programs provide support, counseling, and resources to help individuals quit smoking successfully. These programs may offer behavioral interventions, pharmacotherapy (such as nicotine replacement therapy or prescription medications), and ongoing support to address nicotine addiction and related challenges."
                 },
                 new Intervention
                 {
+                    ID = 3,
                     Name = "Disease Management Program",
                     Description = "Disease management programs provide ongoing support and coordination of care for individuals with chronic conditions like COPD."
                 }

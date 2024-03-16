@@ -17,12 +17,14 @@ namespace Portal.Patient.Pages
 
         protected override void OnInitialized()
         {
+            Console.Write("initialized view test");
             _interventions = _interventionService.GetSuggestedInterventiondForCurrentUser();
             base.OnInitialized();
         }
 
         private bool Enroll(int interventionID)
         {
+            Console.Write($"enrolling in {interventionID}");
             return _interventionService.EnrollCurrentUser(interventionID);
         }
     }
