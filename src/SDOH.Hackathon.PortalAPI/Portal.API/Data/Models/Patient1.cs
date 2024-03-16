@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class Patient1
+public partial class Patient1 : IIdentified
 {
     public string? Id { get; set; }
 
@@ -58,4 +59,6 @@ public partial class Patient1
     public decimal? HealthcareCoverage { get; set; }
 
     public long? Income { get; set; }
+
+    public byte[]? Smoker { get; set; }
 }

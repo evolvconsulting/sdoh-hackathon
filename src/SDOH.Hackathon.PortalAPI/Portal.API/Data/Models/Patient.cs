@@ -6,7 +6,7 @@ namespace Data.Models;
 
 public partial class Patient : IIdentified
 {
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     public DateOnly? Birthdate { get; set; }
 

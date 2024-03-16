@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class Organization
+public partial class Organization : IIdentified
 {
     public string? Id { get; set; }
 

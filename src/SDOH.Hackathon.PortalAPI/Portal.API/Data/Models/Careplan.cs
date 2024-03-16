@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class Careplan
+public partial class Careplan : IIdentified
 {
     public string? Id { get; set; }
 

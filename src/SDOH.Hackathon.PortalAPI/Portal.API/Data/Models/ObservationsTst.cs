@@ -4,7 +4,7 @@ using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class Observation
+public partial class ObservationsTst
 {
     public string? C1 { get; set; }
 
