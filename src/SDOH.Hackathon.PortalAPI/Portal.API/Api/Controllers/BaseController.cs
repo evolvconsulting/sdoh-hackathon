@@ -9,10 +9,10 @@ namespace dotnet8.Controllers
     public abstract class BaseController<T> : Controller
         where T: class, IIdentified
     {
-        protected Context _context;
+        protected ScaffoldedContext _context;
         protected readonly IConfiguration _config;
 
-        public BaseController(Context context, IConfiguration configuration)
+        public BaseController(ScaffoldedContext context, IConfiguration configuration)
         {
             _context = context;
             _config = configuration;
@@ -23,7 +23,7 @@ namespace dotnet8.Controllers
         [ProducesResponseType<object>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Policy="default-api-access")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string id)
         {
             var result = _context.Set<T>().Where(x => x.Id == id).FirstOrDefault();
             return result == null ? NotFound() : Ok(result);
@@ -65,7 +65,7 @@ namespace dotnet8.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Policy="default-api-access")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             var existingEntity = _context.Set<T>().Where(x => x.Id == id).FirstOrDefault();
             if(existingEntity == null){

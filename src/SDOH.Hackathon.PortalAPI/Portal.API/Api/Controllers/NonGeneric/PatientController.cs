@@ -1,61 +1,62 @@
 ﻿using Data;
-using Data.Entities;
+using dotnet8.Models;
+using dotnet8.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.Mime.MediaTypeNames;
 using Newtonsoft.Json;
-using dotnet8.Models;
-using dotnet8.Interfaces;
+using Data.Models;
+using Data.Interfaces;
 using System.Text;
 
 namespace dotnet8.Controllers
 {
     [ApiController]
-    [Route("users")]
-    public class UserController : BaseController<User>
+    [Route("patients")]
+    public class PatientController : BaseController<Patient>
     {
         IHttpClientFactory _clientFactory;
         IAuthService _authService;
-        public UserController(Context context, IConfiguration configuration, IHttpClientFactory clientFactory, IAuthService authService) : base(context, configuration) { 
+        public PatientController(ScaffoldedContext context, IConfiguration configuration, IHttpClientFactory clientFactory, IAuthService authService) : base(context, configuration) { 
             _clientFactory = clientFactory;
             _authService = authService;
         }
 
-        [HttpPut]
-        [Route("register")]
-        [ProducesResponseType<object>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Register([FromBody]UserRegistrationEntity entity)
-        {
-            var adminToken = "";
-            try{
-                adminToken =  await _authService.GetAdminToken();
-            }
-            catch(HttpRequestException e){
-                Console.WriteLine(e.Message);
-                return StatusCode((int)e.StatusCode, $"Failed to get AdminToken: {e.Message}");
-            }
-            try{
-                using (var client = _clientFactory.CreateClient())
-                {
-                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + adminToken);
-                    var userAddResponse = await client.PostAsync(_config.GetSection("KeyCloak").GetSection("AddUserEndpoint").Value, CreateUserPostContent(entity));
-                    var a = await userAddResponse.Content.ReadAsStringAsync();
-                    if(!userAddResponse.IsSuccessStatusCode){
-                        return StatusCode((int)userAddResponse.StatusCode, a);
-                    }
-                }
-            }
-            catch(Exception e){
-                Console.WriteLine(e.Message);
-            }
-            return await base.Put(new User { 
-                Id = entity.Id,
-                Username = entity.Username,
-                Email = entity.Email,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName 
-            });
-        }
+        // [HttpPut]
+        // [Route("register")]
+        // [ProducesResponseType<object>(StatusCodes.Status200OK)]
+        // [ProducesResponseType(StatusCodes.Status404NotFound)]
+        // public async Task<IActionResult> Register([FromBody]UserRegistrationEntity entity)
+        // {
+        //     var adminToken = "";
+        //     try{
+        //         adminToken =  await _authService.GetAdminToken();
+        //     }
+        //     catch(HttpRequestException e){
+        //         Console.WriteLine(e.Message);
+        //         return StatusCode((int)e.StatusCode, $"Failed to get AdminToken: {e.Message}");
+        //     }
+        //     try{
+        //         using (var client = _clientFactory.CreateClient())
+        //         {
+        //             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + adminToken);
+        //             var userAddResponse = await client.PostAsync(_config.GetSection("KeyCloak").GetSection("AddUserEndpoint").Value, CreateUserPostContent(entity));
+        //             var a = await userAddResponse.Content.ReadAsStringAsync();
+        //             if(!userAddResponse.IsSuccessStatusCode){
+        //                 return StatusCode((int)userAddResponse.StatusCode, a);
+        //             }
+        //         }
+        //     }
+        //     catch(Exception e){
+        //         Console.WriteLine(e.Message);
+        //     }
+        //     return await base.Put(new Patient { 
+        //         Id = entity.Id,
+        //         Username = entity.Username,
+        //         Email = entity.Email,
+        //         FirstName = entity.FirstName,
+        //         LastName = entity.LastName 
+        //     });
+        // }
 
         [HttpPut]
         [Route("login")]
