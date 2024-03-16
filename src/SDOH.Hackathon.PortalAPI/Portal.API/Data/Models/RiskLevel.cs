@@ -4,7 +4,7 @@ using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class RiskLevel
+public partial class RiskLevel : IIdentified
 {
     public string Id { get; set; } = null!;
 

@@ -4,7 +4,7 @@ using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class NotificationType
+public partial class NotificationType : IIdentified
 {
     public string Id { get; set; } = null!;
 
