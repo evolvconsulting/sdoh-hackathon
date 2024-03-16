@@ -1,10 +1,10 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider Theme="evolvTheme" />
 
 <MudLayout>
     <MudAppBar Elevation="1" Bottom="true" Fixed="true" justify-center>
-        <MudIconButton Icon="@Icons.Material.Filled.Home" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.Home" Color="Color.Inherit" Href="/" />
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.MedicalServices" Color="Color.Inherit" Title="Interventions" Href="interventions" />
         <MudSpacer/>
@@ -18,3 +18,17 @@
         @Body
     </MudMainContent>
 </MudLayout>
+
+
+@code {
+    MudTheme evolvTheme = new MudTheme()
+        {
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "Open Sans Light" }
+                }
+            }
+        };
+}

@@ -1,10 +1,10 @@
 ﻿@page "/notifications"
 @using System.Collections.ObjectModel
 
-<h2>Notifications</h2>
+<MudText Typo="Typo.h4">Notifications</MudText>
 
 <div hidden="@(!NewNotifications.Any())">
-    <h3 Class="mt-4">New</h3>
+    <MudText Typo="Typo.h5" Class="mt-4">New</MudText>
     <MudList Clickable="true">
         @foreach (var notification in NewNotifications)
         {
