@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Data.Models;
 
-public partial class Condition
+public partial class PatientCondition
 {
     public DateOnly? StartTime { get; set; }
 

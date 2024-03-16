@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Data.Models;
 
-namespace Data;
+namespace Data.Models;
 
 public partial class ScaffoldedContext : DbContext
 {
@@ -16,19 +15,17 @@ public partial class ScaffoldedContext : DbContext
     {
     }
 
-    public virtual DbSet<Condition> Conditions { get; set; }
-
     public virtual DbSet<Intervention> Interventions { get; set; }
 
     public virtual DbSet<InterventionResource> InterventionResources { get; set; }
-
-    public virtual DbSet<MappingTable> MappingTables { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
     public virtual DbSet<NotificationType> NotificationTypes { get; set; }
 
     public virtual DbSet<Patient> Patients { get; set; }
+
+    public virtual DbSet<PatientCondition> PatientConditions { get; set; }
 
     public virtual DbSet<PatientIntervention> PatientInterventions { get; set; }
 
@@ -44,22 +41,6 @@ public partial class ScaffoldedContext : DbContext
     {
         modelBuilder.HasDefaultSchema("PUBLIC");
 
-        modelBuilder.Entity<Condition>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("CONDITIONS", "PUBLIC");
-
-            entity.Property(e => e.Code)
-                .HasColumnType("NUMBER(38,0)")
-                .HasColumnName("CODE");
-            entity.Property(e => e.Description).HasColumnName("DESCRIPTION");
-            entity.Property(e => e.Encounter).HasColumnName("ENCOUNTER");
-            entity.Property(e => e.Patient).HasColumnName("PATIENT");
-            entity.Property(e => e.StartTime).HasColumnName("START_TIME");
-            entity.Property(e => e.Stop).HasColumnName("STOP");
-        });
-
         modelBuilder.Entity<Intervention>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_8385a574-2f6f-4b9a-837f-474298ad36dd");
@@ -67,7 +48,7 @@ public partial class ScaffoldedContext : DbContext
             entity.ToTable("INTERVENTION");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.InterventionId).HasColumnName("INTERVENTION_ID");
+            entity.Property(e => e.Description).HasColumnName("DESCRIPTION");
             entity.Property(e => e.Name).HasColumnName("NAME");
         });
 
@@ -78,28 +59,11 @@ public partial class ScaffoldedContext : DbContext
             entity.ToTable("INTERVENTION_RESOURCE");
 
             entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.InterventionResourceId).HasColumnName("INTERVENTION_RESOURCE_ID");
+            entity.Property(e => e.Document).HasColumnName("DOCUMENT");
             entity.Property(e => e.TypeId)
                 .HasMaxLength(255)
                 .HasColumnName("TYPE_ID");
-        });
-
-        modelBuilder.Entity<MappingTable>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_3f014d86-a52e-497a-a489-7446d758cf78");
-
-            entity.ToTable("MAPPING_TABLE");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.InterventionId)
-                .HasColumnType("NUMBER(38,0)")
-                .HasColumnName("INTERVENTION_ID");
-            entity.Property(e => e.MappingId).HasColumnName("MAPPING_ID");
-            entity.Property(e => e.NotificationId)
-                .HasColumnType("NUMBER(38,0)")
-                .HasColumnName("NOTIFICATION_ID");
-            entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
-            entity.Property(e => e.PatientInterventionNotification).HasColumnName("PATIENT_INTERVENTION_NOTIFICATION");
+            entity.Property(e => e.Url).HasColumnName("URL");
         });
 
         modelBuilder.Entity<Notification>(entity =>
@@ -118,7 +82,6 @@ public partial class ScaffoldedContext : DbContext
                 .HasColumnType("NUMBER(38,0)")
                 .HasColumnName("IS_DELETED");
             entity.Property(e => e.Message).HasColumnName("MESSAGE");
-            entity.Property(e => e.NotificationId).HasColumnName("NOTIFICATION_ID");
             entity.Property(e => e.NotificationTypeId).HasColumnName("NOTIFICATION_TYPE_ID");
             entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
             entity.Property(e => e.ReadDate).HasColumnName("READ_DATE");
@@ -132,7 +95,6 @@ public partial class ScaffoldedContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Name).HasColumnName("NAME");
-            entity.Property(e => e.NotificationTypeId).HasColumnName("NOTIFICATION_TYPE_ID");
             entity.Property(e => e.Template).HasColumnName("TEMPLATE");
         });
 
@@ -188,6 +150,22 @@ public partial class ScaffoldedContext : DbContext
                 .HasColumnName("ZIP");
         });
 
+        modelBuilder.Entity<PatientCondition>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("PATIENT_CONDITION");
+
+            entity.Property(e => e.Code)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("CODE");
+            entity.Property(e => e.Description).HasColumnName("DESCRIPTION");
+            entity.Property(e => e.Encounter).HasColumnName("ENCOUNTER");
+            entity.Property(e => e.Patient).HasColumnName("PATIENT");
+            entity.Property(e => e.StartTime).HasColumnName("START_TIME");
+            entity.Property(e => e.Stop).HasColumnName("STOP");
+        });
+
         modelBuilder.Entity<PatientIntervention>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_e7bb0303-7d82-4e8d-bf83-02a04bcc1cf5");
@@ -201,7 +179,6 @@ public partial class ScaffoldedContext : DbContext
                 .HasColumnName("IS_MANUAL");
             entity.Property(e => e.OptOutDate).HasColumnName("OPT_OUT_DATE");
             entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
-            entity.Property(e => e.PatientInterventionId).HasColumnName("PATIENT_INTERVENTION_ID");
             entity.Property(e => e.SentToUserDate).HasColumnName("SENT_TO_USER_DATE");
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
         });
@@ -214,7 +191,6 @@ public partial class ScaffoldedContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
-            entity.Property(e => e.PatientRiskFactorId).HasColumnName("PATIENT_RISK_FACTOR_ID");
             entity.Property(e => e.Value).HasColumnName("VALUE");
         });
 
@@ -227,7 +203,6 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.FromDate).HasColumnName("FROM_DATE");
             entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
-            entity.Property(e => e.RiskLevelId).HasColumnName("RISK_LEVEL_ID");
             entity.Property(e => e.ToDate).HasColumnName("TO_DATE");
         });
 
@@ -239,7 +214,6 @@ public partial class ScaffoldedContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Name).HasColumnName("NAME");
-            entity.Property(e => e.RiskLevelId).HasColumnName("RISK_LEVEL_ID");
             entity.Property(e => e.Severity).HasColumnName("SEVERITY");
         });
 
@@ -251,7 +225,6 @@ public partial class ScaffoldedContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.InterventionId).HasColumnName("INTERVENTION_ID");
-            entity.Property(e => e.RiskLevelInterventionId).HasColumnName("RISK_LEVEL_INTERVENTION_ID");
         });
 
         OnModelCreatingPartial(modelBuilder);

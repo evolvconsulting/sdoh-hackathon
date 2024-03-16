@@ -2,6 +2,40 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div Class="d-flex gap-4">
+    
+    <MudCard Width="50%">
+        <MudText Typo="Typo.h5">Trends</MudText>
 
-Welcome to your new app.
+        <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" @bind-Value="_selectedTrendLine">
+            <MudSelectItem Value="@("COPD Risk Levels")" />
+            <MudSelectItem Value="@("Pain Levels")" />
+            <MudSelectItem Value="@("Medication Compliance")" />
+        </MudSelect>
+        <MudCardContent>
+            <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" Width="100%" Height="350px" ChartOptions="@Options"  />
+        </MudCardContent>
+    </MudCard>
+    
+    <MudCard Width="50%">
+            <MudText Typo="Typo.h5">Reminders</MudText>
+        <MudCardContent>
+            <MudText>9:30 AM</MudText>
+            <MudText Typo="Typo.subtitle2">2mg Ativan</MudText>
+        </MudCardContent>
+    </MudCard>
+</div>
+
+
+@code {
+    private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+    public ChartOptions Options = new ChartOptions();
+
+    private string _selectedTrendLine = "COPD Risk Levels";
+
+    public List<ChartSeries> Series = new List<ChartSeries>()
+    {
+       new ChartSeries() { Name="Risk Level", Data = new double[] { 10, 10, 20, 20, 10, 30, 30, 30, 30 } }
+    };
+    // public string[] XAxisLabels = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" };
+}
