@@ -59,4 +59,6 @@ public partial class Patient : IIdentified
     public decimal? HealthcareCoverage { get; set; }
 
     public long? Income { get; set; }
+
+    public long? Smoker { get; set; }
 }
