@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Data.Interfaces;
 using Data.Models;
 
 namespace Data;
@@ -26,6 +27,8 @@ public partial class ScaffoldedContext : DbContext
 
     public virtual DbSet<Condition> Conditions { get; set; }
 
+    public virtual DbSet<Condition1> Conditions1 { get; set; }
+
     public virtual DbSet<Device> Devices { get; set; }
 
     public virtual DbSet<Encounter> Encounters { get; set; }
@@ -37,6 +40,8 @@ public partial class ScaffoldedContext : DbContext
     public virtual DbSet<Medication> Medications { get; set; }
 
     public virtual DbSet<Observation> Observations { get; set; }
+
+    public virtual DbSet<ObservationsTst> ObservationsTsts { get; set; }
 
     public virtual DbSet<Organization> Organizations { get; set; }
 
@@ -272,6 +277,22 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.Stop).HasColumnName("STOP");
         });
 
+        modelBuilder.Entity<Condition1>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("CONDITIONS");
+
+            entity.Property(e => e.Code)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("CODE");
+            entity.Property(e => e.Description).HasColumnName("DESCRIPTION");
+            entity.Property(e => e.Encounter).HasColumnName("ENCOUNTER");
+            entity.Property(e => e.Patient).HasColumnName("PATIENT");
+            entity.Property(e => e.StartTime).HasColumnName("START_TIME");
+            entity.Property(e => e.Stop).HasColumnName("STOP");
+        });
+
         modelBuilder.Entity<Device>(entity =>
         {
             entity
@@ -405,6 +426,13 @@ public partial class ScaffoldedContext : DbContext
                 .ToTable("OBSERVATIONS", "HL7");
         });
 
+        modelBuilder.Entity<ObservationsTst>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("OBSERVATIONS_TST", "HL7");
+        });
+
         modelBuilder.Entity<Organization>(entity =>
         {
             entity
@@ -438,7 +466,7 @@ public partial class ScaffoldedContext : DbContext
         {
             entity
                 .HasNoKey()
-                .ToTable("PATIENTS");
+                .ToTable("PATIENTS", "HL7");
 
             entity.Property(e => e.Address).HasColumnName("ADDRESS");
             entity.Property(e => e.Birthdate).HasColumnName("BIRTHDATE");
@@ -487,7 +515,7 @@ public partial class ScaffoldedContext : DbContext
         {
             entity
                 .HasNoKey()
-                .ToTable("PATIENTS", "HL7");
+                .ToTable("PATIENTS");
 
             entity.Property(e => e.Address).HasColumnName("ADDRESS");
             entity.Property(e => e.Birthdate).HasColumnName("BIRTHDATE");
@@ -524,6 +552,7 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.Passport).HasColumnName("PASSPORT");
             entity.Property(e => e.Prefix).HasColumnName("PREFIX");
             entity.Property(e => e.Race).HasColumnName("RACE");
+            entity.Property(e => e.Smoker).HasColumnName("SMOKER");
             entity.Property(e => e.Ssn).HasColumnName("SSN");
             entity.Property(e => e.State).HasColumnName("STATE");
             entity.Property(e => e.Suffix).HasColumnName("SUFFIX");

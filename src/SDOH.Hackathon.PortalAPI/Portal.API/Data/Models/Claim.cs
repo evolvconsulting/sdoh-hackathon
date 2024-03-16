@@ -6,7 +6,7 @@ namespace Data.Models;
 
 public partial class Claim : IIdentified
 {
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
     public string? Patientid { get; set; }
 
