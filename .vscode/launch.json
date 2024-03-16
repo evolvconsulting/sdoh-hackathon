@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Api/bin/Debug/net8.0/dotnet8.dll",
+            "program": "${workspaceFolder}/src/SDOH.Hackathon.PortalAPI/Portal.API/Api/bin/Debug/net8.0/dotnet8.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
