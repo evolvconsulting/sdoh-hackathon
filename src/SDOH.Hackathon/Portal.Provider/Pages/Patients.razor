@@ -1,0 +1,44 @@
+﻿@page "/"
+@page "/patients"
+
+@inject NavigationManager Navigation
+
+<MudStack Style="margin: 20px">
+    <MudText Typo="Typo.h4">Patients</MudText>
+    
+    <MudAutocomplete T="string" Label="Search" @bind-Value="PatientName" SearchFunc="@PatientNameSearch"
+                     ResetValueOnEmptyText="@resetValueOnEmptyText"
+                     CoerceText="@coerceText" CoerceValue="@coerceValue"
+                     AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" />
+    
+    <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Style="height: 400px; overflow-y: scroll">
+        <MudList Clickable="true">
+
+            @if (PatientList != null) {
+                foreach (var patient in PatientList) {
+
+                    <MudListItem OnClick="@(() => Navigation.NavigateTo($"/patients/{patient.Id}"))">
+                        <MudText Typo="Typo.h6">@($"{patient.LastName}, {patient.FirstName} {patient.MiddleInitial}.")</MudText>
+                        <MudStack Row=true>
+                            <MudChip Color="Color.Default">@($"DOB: {@patient.DateOfBirth.ToString("MM/dd/yyyy")}")</MudChip>
+
+                            @if (patient.Interventions.Count == 0)
+                            {
+                                <MudChip Color="Color.Success">0 Interventions to Review </MudChip>
+                            }
+                            else
+                            {
+                                <MudChip Color="Color.Error">@($"{patient.Interventions.Count} Interventions to Review")</MudChip>
+                            }
+
+                            <MudChip Color="Color.Info">@patient.RiskLevel</MudChip>
+                        </MudStack>
+                        
+                    </MudListItem>
+                    <MudDivider/>
+                }
+            }
+        </MudList>
+    </MudContainer>
+
+</MudStack>

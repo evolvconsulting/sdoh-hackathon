@@ -1,0 +1,25 @@
+﻿@page "/patients/{Id}"
+@inject NavigationManager Navigation
+
+<MudStack Style="margin: 20px">
+    <MudStack Row=true>
+        <MudIconButton Icon="@Icons.Material.Outlined.ArrowLeft" OnClick="@(() => Navigation.NavigateTo("/patients"))"></MudIconButton>
+        <MudText Typo="Typo.h4">Patient Details</MudText>
+    </MudStack>
+
+    <MudText Typo="Typo.h6">@($"{currentPatient.LastName}, {currentPatient.FirstName} {currentPatient.MiddleInitial}.")</MudText>
+    <MudStack Row=true>
+        <MudChip Color="Color.Default">@($"DOB: {@currentPatient.DateOfBirth.ToString("MM/dd/yyyy")}")</MudChip>
+
+        @if (currentPatient.Interventions.Count == 0)
+        {
+            <MudChip Color="Color.Success">0 Interventions to Review </MudChip>
+        }
+        else
+        {
+            <MudChip Color="Color.Error">@($"{currentPatient.Interventions.Count} Interventions to Review")</MudChip>
+        }
+
+        <MudChip Color="Color.Info">@currentPatient.RiskLevel</MudChip>
+    </MudStack>
+</MudStack>
