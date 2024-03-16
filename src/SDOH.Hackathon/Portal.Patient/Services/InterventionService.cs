@@ -31,7 +31,7 @@ namespace Portal.Patient.Services
             };
         }
 
-        public bool EnrollCurrentUser(interventionID)
+        public bool EnrollCurrentUser(int interventionID)
         {
             //TODO: wire up to API
             return true;
