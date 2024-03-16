@@ -2,6 +2,7 @@
 using Portal.Provider.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Portal.Provider.Repositories
 {
@@ -11,9 +12,9 @@ namespace Portal.Provider.Repositories
 
         private List<Patient> MockPatients { get; set; }
 
-        public PatientRepository() {
-
-            List<Patient> mockPatientList = new();
+        public PatientRepository()
+        {
+            List<Patient> mockPatientList = new List<Patient>();
 
             for (int i = 0; i < 30; i++)
             {
@@ -26,6 +27,7 @@ namespace Portal.Provider.Repositories
                     MiddleInitial = GenerateRandomMiddleInitial(),
                     DateOfBirth = GenerateRandomDateOfBirth(),
                     Interventions = GenerateRandomInterventions(),
+                    RiskFactors = GenerateRandomRiskFactors(),
                     RiskLevel = GenerateRandomRiskLevel()
                 };
 
@@ -37,7 +39,7 @@ namespace Portal.Provider.Repositories
 
         public Patient Get(string id)
         {
-            return MockPatients.First(patient => patient.Id == id);
+            return MockPatients.FirstOrDefault(patient => patient.Id == id);
         }
 
         public List<Patient> GetAll()
@@ -76,20 +78,62 @@ namespace Portal.Provider.Repositories
         {
             List<Intervention> interventions = new List<Intervention>();
 
-            // Generating random number of interventions (between 0 and 5)
-            int numberOfInterventions = random.Next(6);
-            string[] interventionNames = { "Intervention A", "Intervention B", "Intervention C", "Intervention D", "Intervention E" }; // Sample intervention names
+            // Realistic COPD interventions related to social determinants of health
+            Dictionary<string, string> interventionDescriptions = new Dictionary<string, string>()
+            {
+                { "Smoking cessation programs", "Smoking cessation programs provide support and resources to individuals trying to quit smoking, including counseling, medication, and behavioral therapy." },
+                { "Access to affordable housing", "Access to affordable housing initiatives aim to provide stable housing options for individuals with COPD, reducing exposure to environmental triggers and improving overall health outcomes." },
+                { "Education on indoor air quality", "Education on indoor air quality raises awareness about common indoor pollutants and how to mitigate them, including proper ventilation, use of air purifiers, and avoiding harmful substances." },
+                { "Community support for physical activity", "Community support for physical activity programs promote exercise and physical activity among individuals with COPD, focusing on activities suitable for their condition and abilities." },
+                { "Access to nutritious food", "Access to nutritious food initiatives ensure individuals have access to healthy, balanced diets, which can help manage COPD symptoms and improve overall health." },
+                { "Mental health support services", "Mental health support services address the psychological impact of COPD, providing counseling, therapy, and support groups to manage stress, anxiety, and depression associated with the condition." }
+            };
 
-            for (int i = 0; i < numberOfInterventions; i++)
+            // Generate random number of interventions (between 0 and 5)
+            int numberOfInterventions = random.Next(6);
+
+            // Randomly select interventions from the dictionary
+            var selectedInterventions = interventionDescriptions.Keys.OrderBy(x => random.Next()).Take(numberOfInterventions);
+
+            foreach (var interventionName in selectedInterventions)
             {
                 interventions.Add(new Intervention
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = interventionNames[random.Next(interventionNames.Length)]
+                    Name = interventionName,
+                    Description = interventionDescriptions[interventionName]
                 });
             }
 
             return interventions;
+        }
+
+        private List<RiskFactor> GenerateRandomRiskFactors()
+        {
+            List<RiskFactor> riskFactors = new List<RiskFactor>();
+
+            // Generate random number of risk factors (between 0 and 5)
+            int numberOfRiskFactors = random.Next(6);
+
+            // Realistic COPD risk factors related to social determinants of health
+            string[] riskFactorNames = {
+                "Exposure to secondhand smoke",
+                "Occupational exposure to pollutants",
+                "Poor indoor air quality",
+                "Low socioeconomic status",
+                "Lack of access to healthcare",
+                "Limited education"
+            };
+
+            for (int i = 0; i < numberOfRiskFactors; i++)
+            {
+                riskFactors.Add(new RiskFactor
+                {
+                    Name = riskFactorNames[random.Next(riskFactorNames.Length)]
+                });
+            }
+
+            return riskFactors;
         }
 
         private string GenerateRandomRiskLevel()

@@ -23,6 +23,4 @@ public partial class Patient
         currentPatient = PatientService.GetById(Id);
         AppBarService.SetSettings(PageName, true, "/patients");
     }
-
-
 }

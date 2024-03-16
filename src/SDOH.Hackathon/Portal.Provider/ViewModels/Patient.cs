@@ -8,5 +8,6 @@ public class Patient
     public char MiddleInitial { get; set; }
     public DateTime DateOfBirth { get; set; }
     public required List<Intervention> Interventions { get; set; }
+    public required List<RiskFactor> RiskFactors { get; set; }
     public required string RiskLevel { get; set; }
 }

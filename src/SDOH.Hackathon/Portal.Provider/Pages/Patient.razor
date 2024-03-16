@@ -1,21 +1,80 @@
 ﻿@page "/patients/{Id}"
 @inject NavigationManager Navigation
 
-<MudStack Style="margin: 20px">
+ <MudPaper Class="d-flex flex-column overflow-x-auto " Height="calc(100vh - 70px)">
+    <MudStack Style="margin: 25px">
+        <MudPaper Elevation="5" Style="margin: 10px">
+            <MudStack Spacing="4" Style="margin: 20px">
+                <MudText Typo="Typo.h4">@($"{currentPatient.LastName}, {currentPatient.FirstName} {currentPatient.MiddleInitial}.")</MudText>
+                <MudStack Spacing="8" Row=true>
+                    <MudChip Size="Size.Large" Color="Color.Default" Style="font-size:25px">@($"DOB: {@currentPatient.DateOfBirth.ToString("MM/dd/yyyy")}")</MudChip>
 
-    <MudText Typo="Typo.h6">@($"{currentPatient.LastName}, {currentPatient.FirstName} {currentPatient.MiddleInitial}.")</MudText>
-    <MudStack Row=true>
-        <MudChip Color="Color.Default">@($"DOB: {@currentPatient.DateOfBirth.ToString("MM/dd/yyyy")}")</MudChip>
+                    @if (currentPatient.Interventions.Count == 0)
+                    {
+                        <MudChip Size="Size.Large" Color="Color.Success" Style="font-size:25px">0 Interventions to Review </MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Size="Size.Large" Color="Color.Error" Style="font-size:25px">@($"{currentPatient.Interventions.Count} Interventions to Review")</MudChip>
+                    }
 
-        @if (currentPatient.Interventions.Count == 0)
-        {
-            <MudChip Color="Color.Success">0 Interventions to Review </MudChip>
-        }
-        else
-        {
-            <MudChip Color="Color.Error">@($"{currentPatient.Interventions.Count} Interventions to Review")</MudChip>
-        }
+                    <MudChip Size="Size.Large" Color="Color.Info" Style="font-size:25px">@currentPatient.RiskLevel</MudChip>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
+        <MudPaper Elevation="5" Style="margin: 10px">
+            <MudStack Spacing="5" Style="margin: 20px">
+                <MudStack AlignItems=AlignItems.Center Row=true>
+                    <MudText Typo="Typo.h4">Risk Factors</MudText>
+                    <MudSpacer/>
+                    <MudFab DisableElevation="true" Size="Size.Large" IconSize="Size.Medium" EndIcon="@Icons.Material.Filled.Add" Label="Add" Style="font-size: 20px" />
+                </MudStack>
+                <MudDivider />
 
-        <MudChip Color="Color.Info">@currentPatient.RiskLevel</MudChip>
+                @if (currentPatient.RiskFactors.Count > 0)
+                {
+                    @foreach (var riskFactor in currentPatient.RiskFactors)
+                    {
+                        <MudText Typo="Typo.h5">@riskFactor.Name</MudText>
+                        <MudDivider />
+                    }
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">None</MudText>
+                }
+            </MudStack>
+        </MudPaper>
+
+        <MudPaper Elevation="5" Style ="margin: 10px">
+            <MudStack Spacing="5" Style ="margin: 20px">
+                <MudStack AlignItems="AlignItems.Center" Row=true>
+                    <MudText Typo="Typo.h4">Interventions</MudText>
+                    <MudSpacer />
+                    <MudFab DisableElevation="true" Size="Size.Large" IconSize="Size.Medium" EndIcon="@Icons.Material.Filled.Add" Label="Add" Style="font-size: 20px" />
+                </MudStack>
+                <MudDivider />
+                
+                @if (currentPatient.Interventions.Count > 0)
+                {
+                    @foreach (var intervention in currentPatient.Interventions)
+                    {
+                        <MudStack Row=true>
+                            <MudStack>
+                                <MudText Typo="Typo.h5">@intervention.Name</MudText>
+                                <MudText Typo="Typo.body1">@intervention.Description</MudText>
+                            </MudStack>
+                            <MudSpacer/>
+                            <MudIconButton Size="Size.Large" Icon="@Icons.Material.Rounded.Report"/>
+                        </MudStack>
+                        <MudDivider />
+                    }
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">None</MudText>
+                }
+            </MudStack>
+        </MudPaper>
     </MudStack>
-</MudStack>
+</MudPaper>
