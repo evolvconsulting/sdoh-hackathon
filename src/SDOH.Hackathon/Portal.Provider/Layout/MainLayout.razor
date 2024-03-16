@@ -1,16 +1,48 @@
-﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+﻿@using Portal.Provider.Services
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+@inject AppBarService AppBarService
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudStack AlignItems="AlignItems.Center" Row=true>
+
+            @if (AppBarService.BackButtonEnabled && AppBarService.NavigationRoute != null)
+            {
+                <MudIconButton Icon="@Icons.Material.Outlined.ArrowLeft" Size="Size.Large" Style="color:white;" OnClick="@(() => Navigation.NavigateTo(AppBarService.NavigationRoute))"></MudIconButton>
+            }
+            <MudText Typo="Typo.h4">@AppBarService.CurrentPageName</MudText>
+        </MudStack>
+        
+        <MudSpacer />
+        <MudSwitch @bind-Value="@_isDarkMode" Color="Color.Primary" Class="ma-4" T="bool" Label=@(_isDarkMode ? "Toggle Light Mode" : "Toggle Dark Mode") />
+
+    </MudAppBar>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+<MudThemeProvider @ref="@_mudThemeProvider" @bind-IsDarkMode="@_isDarkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+@code {
+    private bool _isDarkMode;
+    private MudThemeProvider _mudThemeProvider;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkMode = await _mudThemeProvider.GetSystemPreference();
+            _mudThemeProvider.Theme.PaletteDark.AppbarBackground = "#D15635";
+            _mudThemeProvider.Theme.PaletteDark.AppbarText = Colors.Shades.White;
+            _mudThemeProvider.Theme.Palette.AppbarBackground = "#D15635";
+            StateHasChanged();
+        }
+    }
+
+
+}

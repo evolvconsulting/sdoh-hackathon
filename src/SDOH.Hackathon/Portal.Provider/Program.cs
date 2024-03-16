@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
+using Portal.Provider.Interfaces;
+using Portal.Provider.Repositories;
+using Portal.Provider.Services;
+using Portal.Provider.ViewModels;
 
 namespace Portal.Provider
 {
@@ -11,6 +16,12 @@ namespace Portal.Provider
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
+            builder.Services.AddMudServices();
+
+
+            builder.Services.AddSingleton<IRepository<Patient>, PatientRepository>();
+            builder.Services.AddSingleton<IDataService<Patient>, PatientDataService>();
+            builder.Services.AddSingleton<AppBarService>();
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             await builder.Build().RunAsync();
