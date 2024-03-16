@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Api/dotnet8.csproj",
+                "${workspaceFolder}/src/SDOH.Hackathon.PortalAPI/Portal.API/Api/dotnet8.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Api/dotnet8.csproj",
+                "${workspaceFolder}/src/SDOH.Hackathon.PortalAPI/Portal.API/Api/dotnet8.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,7 +32,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Api/dotnet8.csproj",
+                "${workspaceFolde}/src/SDOH.Hackathon.PortalAPI/Portal.API/Api/dotnet8.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
