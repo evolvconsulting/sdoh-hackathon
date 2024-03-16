@@ -65,39 +65,39 @@ var secret = client.GetSecret( builder.Configuration["SnowflakeDbSecretName"]).V
 var connectionString = $"ACCOUNT=LRB04982;host=aovnged-evolv_health.snowflakecomputing.com;user=SVC_EVOLV_SDOH;password={secret};db=EVOLV_SDOH;schema=PUBLIC;warehouse=COMPUTE_WH";
 
 builder.Services.AddDbContext<Data.ScaffoldedContext>(options => options.UseSnowflake(connectionString));
-X509Certificate2 certificate = new X509Certificate2("KeyCloakRealm.Public.crt");
-builder.Services
-    .AddAuthentication(x =>
-    {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }).AddJwtBearer(x =>
-    {
-        x.RequireHttpsMetadata = Convert.ToBoolean(builder.Configuration["Keycloak:require-https"]);
-        x.MetadataAddress = $"{builder.Configuration["Keycloak:server-url"]}/realms/master/.well-known/openid-configuration";
-        //x.Authority = $"{builder.Configuration["Keycloak:server-url"]}/realms/master"; //itest
-        //x.Audience = builder.Configuration["Keycloak:audience"]; itest
-        x.TokenValidationParameters = new TokenValidationParameters
-        {
-            //https://stackoverflow.com/questions/77084743/secure-asp-net-core-rest-api-with-keycloak
-            RoleClaimType = "role",
-            NameClaimType = $"{builder.Configuration["Keycloak:name_claim"]}", //only interesting if you want to map some field in the JWT token to the HttpContext.User.Identity.Name property
-            ValidAudience = $"{builder.Configuration["Keycloak:audience"]}",
-            IssuerSigningKey = new RsaSecurityKey(certificate.GetRSAPublicKey()), //itest
-            //ValidateIssuerSigningKey = false, //itest
-            // https://stackoverflow.com/questions/60306175/bearer-error-invalid-token-error-description-the-issuer-is-invalid
-            ValidateIssuer = Convert.ToBoolean($"{builder.Configuration["Keycloak:validate-issuer"]}")
-        };
-    });
+// X509Certificate2 certificate = new X509Certificate2("KeyCloakRealm.Public.crt");
+// builder.Services
+//     .AddAuthentication(x =>
+//     {
+//         x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//         x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//     }).AddJwtBearer(x =>
+//     {
+//         x.RequireHttpsMetadata = Convert.ToBoolean(builder.Configuration["Keycloak:require-https"]);
+//         x.MetadataAddress = $"{builder.Configuration["Keycloak:server-url"]}/realms/master/.well-known/openid-configuration";
+//         //x.Authority = $"{builder.Configuration["Keycloak:server-url"]}/realms/master"; //itest
+//         //x.Audience = builder.Configuration["Keycloak:audience"]; itest
+//         x.TokenValidationParameters = new TokenValidationParameters
+//         {
+//             //https://stackoverflow.com/questions/77084743/secure-asp-net-core-rest-api-with-keycloak
+//             RoleClaimType = "role",
+//             NameClaimType = $"{builder.Configuration["Keycloak:name_claim"]}", //only interesting if you want to map some field in the JWT token to the HttpContext.User.Identity.Name property
+//             ValidAudience = $"{builder.Configuration["Keycloak:audience"]}",
+//             IssuerSigningKey = new RsaSecurityKey(certificate.GetRSAPublicKey()), //itest
+//             //ValidateIssuerSigningKey = false, //itest
+//             // https://stackoverflow.com/questions/60306175/bearer-error-invalid-token-error-description-the-issuer-is-invalid
+//             ValidateIssuer = Convert.ToBoolean($"{builder.Configuration["Keycloak:validate-issuer"]}")
+//         };
+//     });
         
-builder.Services.AddAuthorization(o => {
-    o.DefaultPolicy = new AuthorizationPolicyBuilder()
-        .RequireAuthenticatedUser()
-        .Build();
-    o.AddPolicy("default-api-access", policy => policy
-        .RequireAuthenticatedUser().RequireClaim(ClaimTypes.Role, "demo-api-default-api-access"));
-});
-builder.Services.AddScoped<IAuthService, AuthService>();
+// builder.Services.AddAuthorization(o => {
+//     o.DefaultPolicy = new AuthorizationPolicyBuilder()
+//         .RequireAuthenticatedUser()
+//         .Build();
+//     o.AddPolicy("default-api-access", policy => policy
+//         .RequireAuthenticatedUser().RequireClaim(ClaimTypes.Role, "demo-api-default-api-access"));
+// });
+// builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

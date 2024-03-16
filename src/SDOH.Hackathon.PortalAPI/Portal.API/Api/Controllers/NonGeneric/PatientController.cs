@@ -14,11 +14,7 @@ namespace dotnet8.Controllers
     [Route("patients")]
     public class PatientController : BaseController<Patient>
     {
-        IHttpClientFactory _clientFactory;
-        IAuthService _authService;
-        public PatientController(ScaffoldedContext context, IConfiguration configuration, IHttpClientFactory clientFactory, IAuthService authService) : base(context, configuration) { 
-            _clientFactory = clientFactory;
-            _authService = authService;
+        public PatientController(ScaffoldedContext context, IConfiguration configuration) : base(context, configuration) { 
         }
 
         // [HttpPut]
@@ -58,46 +54,46 @@ namespace dotnet8.Controllers
         //     });
         // }
 
-        [HttpPut]
-        [Route("login")]
-        [ProducesResponseType<object>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Login(string username, [FromBody]string password)
-        {            
-            string token = "";
-            try{
-                token = await _authService.GetUserToken(username, password);
-            }
-            catch(HttpRequestException e){
-                Console.WriteLine(e.Message);
-                return StatusCode((int)e.StatusCode, e.Message);
-            }
-            return Ok(token);
-        }
+        // [HttpPut]
+        // [Route("login")]
+        // [ProducesResponseType<object>(StatusCodes.Status200OK)]
+        // [ProducesResponseType(StatusCodes.Status404NotFound)]
+        // public async Task<IActionResult> Login(string username, [FromBody]string password)
+        // {            
+        //     string token = "";
+        //     try{
+        //         token = await _authService.GetUserToken(username, password);
+        //     }
+        //     catch(HttpRequestException e){
+        //         Console.WriteLine(e.Message);
+        //         return StatusCode((int)e.StatusCode, e.Message);
+        //     }
+        //     return Ok(token);
+        // }
 
-        private StringContent CreateUserPostContent(UserRegistrationEntity user)
-        {
-            var userCred = new {
-                type = "password",
-                value = user.Password,
-                temporary = false
-            };
-            var userRepresentation = new {
-                enabled = true,
-                username = user.Username,
-                email = user.Email,
-                firstName = user.FirstName,
-                lastName = user.LastName,
-                credentials =  new [] { userCred }
-            };
+        // private StringContent CreateUserPostContent(UserRegistrationEntity user)
+        // {
+        //     var userCred = new {
+        //         type = "password",
+        //         value = user.Password,
+        //         temporary = false
+        //     };
+        //     var userRepresentation = new {
+        //         enabled = true,
+        //         username = user.Username,
+        //         email = user.Email,
+        //         firstName = user.FirstName,
+        //         lastName = user.LastName,
+        //         credentials =  new [] { userCred }
+        //     };
 
-            var postContent = new StringContent(
-                System.Text.Json.JsonSerializer.Serialize(userRepresentation),
-                Encoding.UTF8,
-                Application.Json); 
+        //     var postContent = new StringContent(
+        //         System.Text.Json.JsonSerializer.Serialize(userRepresentation),
+        //         Encoding.UTF8,
+        //         Application.Json); 
             
-            return postContent;
-        }
+        //     return postContent;
+        // }
 
         //When a user logs in via keycloak they are redirected. 
         //This handles the redirect and exchanges the auth code from keycloak for an access token

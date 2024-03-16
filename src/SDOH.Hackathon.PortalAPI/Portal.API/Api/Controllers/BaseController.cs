@@ -22,7 +22,7 @@ namespace dotnet8.Controllers
         [Route("get/{id}")]
         [ProducesResponseType<object>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Authorize(Policy="default-api-access")]
+        //[Authorize(Policy="default-api-access")]
         public IActionResult Get(string id)
         {
             var result = _context.Set<T>().Where(x => x.Id == id).FirstOrDefault();
@@ -32,7 +32,7 @@ namespace dotnet8.Controllers
         [HttpGet]
         [Route("get")]
         [ProducesResponseType<IEnumerable<object>>(StatusCodes.Status200OK)]
-        [Authorize(Policy="default-api-access")]
+        //[Authorize(Policy="default-api-access")]
         public IActionResult GetAll()
         {
             var result = _context.Set<T>().AsEnumerable();
@@ -46,7 +46,7 @@ namespace dotnet8.Controllers
         [Route("put")]
         [ProducesResponseType<object>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Authorize(Policy="default-api-access")]
+        //[Authorize(Policy="default-api-access")]
         public async virtual Task<IActionResult> Put([FromBody]T entity)
         {
             var entityExists = await _context.Set<T>().Where(x => x.Id == entity.Id).AnyAsync();
@@ -64,7 +64,7 @@ namespace dotnet8.Controllers
         [Route("delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Authorize(Policy="default-api-access")]
+        //[Authorize(Policy="default-api-access")]
         public IActionResult Delete(string id)
         {
             var existingEntity = _context.Set<T>().Where(x => x.Id == id).FirstOrDefault();
