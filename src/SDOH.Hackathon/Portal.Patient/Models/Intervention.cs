@@ -4,6 +4,7 @@ namespace Portal.Patient.Models
 {
     public class Intervention : IIntervention
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }

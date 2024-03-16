@@ -19,7 +19,7 @@
                     <MudText Typo="Typo.h4">@intervention.Name</MudText>
                     <MudText>@intervention.Description</MudText>
                     <div Class="d-flex justify-center"> 
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="(e) => Enroll(intervention.ID)">
                             Enroll
                         </MudButton>
                     </div>
