@@ -6,7 +6,7 @@
     <MudAppBar Elevation="1" Bottom="true" Fixed="true" justify-center>
         <MudIconButton Icon="@Icons.Material.Filled.Home" Color="Color.Inherit" Href="/" />
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MedicalServices" Color="Color.Inherit" Title="Interventions" Href="interventions" />
+        <MudIconButton Icon="@Icons.Material.Filled.MedicalServices" Color="Color.Inherit" Title="Interventions" Href="suggestedinterventions" />
         <MudSpacer/>
         <MudIconButton Icon="@Icons.Material.Filled.LocalPharmacy" Color="Color.Inherit" Title="Medications" Href="" />
         <MudSpacer />
@@ -28,6 +28,15 @@
                 Default = new Default()
                 {
                     FontFamily = new[] { "Open Sans Light" }
+                },
+                H4 = new H4
+                {
+                    FontWeight = 700,
+                    //TextTransform = "lowercase"
+                },
+                H5 = new H5
+                {
+                    FontWeight = 700
                 }
             }
         };

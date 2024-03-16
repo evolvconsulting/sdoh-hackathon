@@ -10,57 +10,61 @@
 </MudCard>
 
 
-<MudCarousel Class="mud-m-6" Style="height:400px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="false" TData="object">
-    <MudCarouselItem Transition="transition">
-        <div class="d-flex" style="height:100%">
-            <MudCard Outlined="true">
-                <h2>Home Oxygen Therapy</h2>
-                <h3>Description: </h3>
-                <MudText>
-                    Your body can’t live without the oxygen you breathe in from the air. But if you have lung disease or other medical conditions, you may not get enough of it. That can leave you short of breath and cause problems with your heart, brain, and other parts of your body.
-                </MudText>
-                <div style="text-align: center;">
-                    <MudButton>
-                        Enroll
-                    </MudButton>
-                </div>
-            </MudCard>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem Transition="transition">
-        <div class="d-flex" style="height:100%">
-            <MudCard Outlined="true">
-                <h2>Smoking Cessation Program</h2>
-                <h3>Description: </h3>
-                <MudText>
-                    Smoking is the leading cause of COPD, and quitting smoking is essential in managing the disease and preventing further deterioration of lung function. Smoking cessation programs provide support, counseling, and resources to help individuals quit smoking successfully. These programs may offer behavioral interventions, pharmacotherapy (such as nicotine replacement therapy or prescription medications), and ongoing support to address nicotine addiction and related challenges.
-                </MudText>
-                <div style="text-align: center;">
-                    <MudButton>
-                        Enroll
-                    </MudButton>
-                </div>
-            </MudCard>
-        </div>
-    </MudCarouselItem>
-    <MudCarouselItem Transition="transition">
-        <div class="d-flex" style="height:100%">
-            <MudCard Outlined="true">
-                <h2>Disease Management Program</h2>
-                <h3>Description: </h3>
-                <MudText>
-                    Disease management programs provide ongoing support and coordination of care for individuals with chronic conditions like COPD.
-                </MudText>
-                <div style="text-align: center;">
-                    <MudButton>
-                        Enroll
-                    </MudButton>
-                </div>
-            </MudCard>
-        </div>
-    </MudCarouselItem>
+<MudCarousel Class="mt-4" Style="height:400px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="false" TData="object">
+    @foreach (var intervention in Interventions)
+    {
+        <MudCarouselItem Transition="transition">
+            <div class="d-flex" style="height:100%; width: 100%">
+                <MudCard Outlined="true" Class="px-11 pt-4">
+                    <MudText Typo="Typo.h4">@intervention.Name</MudText>
+                    <MudText>@intervention.Description</MudText>
+                    <div Class="d-flex justify-center"> 
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary">
+                            Enroll
+                        </MudButton>
+                    </div>
+                </MudCard>
+            </div>
+        </MudCarouselItem>
+    }
 </MudCarousel>
 
 @code {
     private Transition transition = Transition.Slide;
+
+    public List<INamedWithDescriptionEntity> Interventions = new List<INamedWithDescriptionEntity>
+    {
+        new SuggestedInterventionItem {
+            Name = "Home Oxygen Therapy", 
+            Description = "Your body can’t live without the oxygen you breathe in from the air. But if you have lung disease or other medical conditions, you may not get enough of it. That can leave you short of breath and cause problems with your heart, brain, and other parts of your body." 
+        },
+        new SuggestedInterventionItem
+        {
+            Name = "Smoking Cessation Program",
+            Description = "Smoking is the leading cause of COPD, and quitting smoking is essential in managing the disease and preventing further deterioration of lung function. Smoking cessation programs provide support, counseling, and resources to help individuals quit smoking successfully. These programs may offer behavioral interventions, pharmacotherapy (such as nicotine replacement therapy or prescription medications), and ongoing support to address nicotine addiction and related challenges."
+        },
+        new SuggestedInterventionItem
+        {
+            Name = "Disease Management Program",
+            Description = "Disease management programs provide ongoing support and coordination of care for individuals with chronic conditions like COPD."
+        }
+    };
+
+    public interface INamedEntity
+    {
+        public string Name { get; set; }   
+    }
+
+    public interface IDescriptionEntity
+    {
+        public string Description { get; set; }
+    }
+
+    public interface INamedWithDescriptionEntity : INamedEntity, IDescriptionEntity { }
+
+    public class SuggestedInterventionItem : INamedWithDescriptionEntity
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
 }

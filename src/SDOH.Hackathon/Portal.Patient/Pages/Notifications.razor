@@ -1,17 +1,18 @@
 ﻿@page "/notifications"
 @using System.Collections.ObjectModel
+@using Portal.Patient.Constants
 
 <MudText Typo="Typo.h4">Notifications</MudText>
 
-<div hidden="@(!NewNotifications.Any())">
+<div hidden="@(!_newNotifications.Any())">
     <MudText Typo="Typo.h5" Class="mt-4">New</MudText>
     <MudList Clickable="true">
-        @foreach (var notification in NewNotifications)
+        @foreach (var notification in _newNotifications)
         {
             var hasLink = NotificationLinkByTypeID.ContainsKey(notification.NotificationTypeID);
-            <MudListItem Href="@(hasLink ? NotificationLinkByTypeID[notification.NotificationTypeID] : "#")" Class="align-content-center">
+            <MudListItem Class="align-content-center" Href="@(hasLink ? NotificationLinkByTypeID[notification.NotificationTypeID] : "#")">
                 @notification.Message
-                <MudIcon hidden="@(!hasLink)" Class="justify-end" Icon="@Icons.Material.Filled.ChevronRight"></MudIcon>
+                <MudIcon hidden="@(!hasLink)" Class="justify-end" Style="float:right" Icon="@Icons.Material.Filled.ChevronRight"></MudIcon>
             </MudListItem>
             <MudDivider />
         }
@@ -19,23 +20,9 @@
 </div>
 
 @code {
-    //TODO: wire up actual notifications
-    public IEnumerable<Notification> NewNotifications = new List<Notification>() { new Notification { NotificationTypeID=(int)NotificationTypeID.RecommendedIntervention, Message = "You have new recommended interventions. Click here to view more information." } };
-    public class Notification
-    {
-        public int NotificationTypeID { get; set; }
-        public string Message { get; set; }
-    }
-
     private IReadOnlyDictionary<int, string> NotificationLinkByTypeID = new ReadOnlyDictionary<int, string>(new Dictionary
     <int, string>
         () {
             { (int)NotificationTypeID.RecommendedIntervention, "SuggestedInterventions" } 
         });
-
-    public enum NotificationTypeID
-    {
-        InformationOnly = 0,
-        RecommendedIntervention = 1
-    }
 }
