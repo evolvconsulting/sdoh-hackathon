@@ -2,6 +2,7 @@
 namespace dotnet8.Services;
 
 using Data;
+using Data.Models;
 using WebPush;
 
 public sealed class NotificationService

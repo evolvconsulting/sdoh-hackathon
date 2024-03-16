@@ -4,11 +4,9 @@ using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class PatientIntervention : IIdentified
+public partial class PatientIntervention
 {
     public string Id { get; set; } = null!;
-
-    public string PatientInterventionId { get; set; } = null!;
 
     public string? PatientId { get; set; }
 

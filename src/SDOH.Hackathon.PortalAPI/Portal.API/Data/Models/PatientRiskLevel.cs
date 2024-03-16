@@ -4,13 +4,11 @@ using Data.Interfaces;
 
 namespace Data.Models;
 
-public partial class PatientRiskLevel : IIdentified
+public partial class PatientRiskLevel
 {
     public string Id { get; set; } = null!;
 
     public string PatientId { get; set; } = null!;
-
-    public string RiskLevelId { get; set; } = null!;
 
     public DateOnly FromDate { get; set; }
 
