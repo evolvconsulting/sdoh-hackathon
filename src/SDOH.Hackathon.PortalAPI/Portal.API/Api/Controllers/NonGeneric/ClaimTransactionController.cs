@@ -7,7 +7,7 @@ namespace dotnet8.Controllers
 {
     [ApiController]
     [Route("claimtransactions")]
-    public class ClaimTransactionController : BaseController<Claim>
+    public class ClaimTransactionController : BaseController<ClaimTra>
     {
         public ClaimTransactionController(ScaffoldedContext context, IConfiguration configuration) : base(context, configuration) { }
     }
