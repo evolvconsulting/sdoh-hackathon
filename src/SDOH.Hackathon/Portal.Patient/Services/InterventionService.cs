@@ -34,12 +34,7 @@ namespace Portal.Patient.Services
         public bool EnrollCurrentUser(int interventionID)
         {
             //TODO: wire up to API
-            return true;
-        }
-
-        private async Task EnrollUser(int interventionID)
-        {
-            bool success = await InterventionService.EnrollCurrentUser(interventionID);
+            private bool success = true;
             if (success)
             {
                 Snackbar.Add("Successfully enrolled in the intervention!", Severity.Success);
@@ -48,6 +43,8 @@ namespace Portal.Patient.Services
             {
                 Snackbar.Add("Failed to enroll in the intervention.", Severity.Error);
             }
+            return true;
         }
+
     }
 }
