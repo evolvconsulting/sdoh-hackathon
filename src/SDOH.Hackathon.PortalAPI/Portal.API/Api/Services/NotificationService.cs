@@ -2,7 +2,8 @@
 namespace dotnet8.Services;
 
 using Data;
-
+using Data.Models;
+using WebPush;
 
 public sealed class NotificationService
 {
@@ -18,13 +19,22 @@ public sealed class NotificationService
         _logger = logger;
     }
 
-    public Guid Subscribe(NotificationSubscription subscription)
+    public async Task Subscribe(NotificationSubscription subscription)
     {
-        return Guid.NewGuid();
+        // TODO need models. 
     }
 
-    public void Notify()
+    public async Task NotifyUser(string userId, string message)
     {
+        // TODO need models to push subscriptions. 
+        var pushSubscription = new PushSubscription();
+        var webPushClient = new WebPushClient();
+
+        try {
+            await webPushClient.SendNotificationAsync(pushSubscription, message);
+        } catch(Exception ex) {
+            _logger.LogError(ex, "Error occured while attempting to push notification");
+        }
 
     }
 

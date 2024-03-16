@@ -26,9 +26,9 @@ public class NotificationController : ControllerBase
     [HttpPut]
     [Route("[controller]/Subscribe")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public IActionResult Subscribe([FromBody] NotificationSubscription subscription)
+    public async Task<IActionResult> Subscribe([FromBody] NotificationSubscription subscription)
     {
-        // TODO
+        await _notificationService.Subscribe(subscription);
         return Ok();
     }
 
