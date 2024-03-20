@@ -34,6 +34,8 @@ namespace Portal.Patient.Services
         public bool EnrollCurrentUser(int interventionID)
         {
             //TODO: wire up to API
+            //call a put on the PatientInterventionTable.
+            //return success or fail.
             private bool success = true;
             if (success)
             {

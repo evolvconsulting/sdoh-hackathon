@@ -1,6 +1,4 @@
-﻿using Portal.Patient.Interfaces;
-
-namespace Portal.Patient.Services
+﻿namespace Portal.Patient.Interfaces
 {
     public interface INotificationService
     {
