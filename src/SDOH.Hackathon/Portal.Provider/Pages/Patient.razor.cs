@@ -1,10 +1,10 @@
-﻿namespace Portal.Provider.Pages;
-
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Portal.Provider.Interfaces;
 using Portal.Provider.Services;
 
-public partial class Patient
+namespace Portal.Provider.Pages;
+
+public partial class Patient : ComponentBase
 {
     [Parameter]
     public string Id { get; set; }

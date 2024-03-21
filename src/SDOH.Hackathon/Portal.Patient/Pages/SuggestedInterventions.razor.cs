@@ -25,7 +25,18 @@ namespace Portal.Patient.Pages
         private bool Enroll(int interventionID)
         {
             Console.Write($"enrolling in {interventionID}");
-            return _interventionService.EnrollCurrentUser(interventionID);
+            var success = _interventionService.EnrollCurrentUser(interventionID);
+
+            if (success)
+            {
+                Snackbar.Add("Successfully enrolled in the intervention!", Severity.Success);
+            }
+            else
+            {
+                Snackbar.Add("Failed to enroll in the intervention.", Severity.Error);
+            }
+
+            return success;
         }
     }
 }

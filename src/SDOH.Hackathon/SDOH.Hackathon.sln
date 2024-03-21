@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Provider", "Portal.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Patient", "Portal.Patient\Portal.Patient.csproj", "{C0522130-2AAC-43A8-8EA2-F8068B4F6362}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Components", "Portal.Components\Portal.Components.csproj", "{CBCD5AFB-89FC-4AFE-8459-B81C0AA85FAE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{C0522130-2AAC-43A8-8EA2-F8068B4F6362}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0522130-2AAC-43A8-8EA2-F8068B4F6362}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0522130-2AAC-43A8-8EA2-F8068B4F6362}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBCD5AFB-89FC-4AFE-8459-B81C0AA85FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBCD5AFB-89FC-4AFE-8459-B81C0AA85FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBCD5AFB-89FC-4AFE-8459-B81C0AA85FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBCD5AFB-89FC-4AFE-8459-B81C0AA85FAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

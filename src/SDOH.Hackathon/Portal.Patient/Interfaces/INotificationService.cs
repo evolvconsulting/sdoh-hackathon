@@ -1,10 +1,8 @@
-﻿namespace Portal.Patient.Interfaces
+﻿namespace Portal.Patient.Interfaces;
+
+public interface INotificationService
 {
-    public interface INotificationService
-    {
-        public IEnumerable<INotification> GetForCurrentUser();
+    public IEnumerable<INotification> GetForCurrentUser();
 
-        public Task Subscribe();
-    }
-
+    public Task Subscribe();
 }

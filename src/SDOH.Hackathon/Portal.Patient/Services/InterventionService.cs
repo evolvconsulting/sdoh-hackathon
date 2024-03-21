@@ -1,10 +1,10 @@
-﻿using Portal.Patient.Interfaces;
+﻿using MudBlazor;
+using Portal.Patient.Interfaces;
 using Portal.Patient.Models;
-using static Portal.Patient.Pages.SuggestedInterventions;
 
-namespace Portal.Patient.Services
-{
-    public class InterventionService : IInterventionService
+namespace Portal.Patient.Services;
+
+public class InterventionService : IInterventionService
     {
         public IEnumerable<IIntervention> GetSuggestedInterventiondForCurrentUser()
         {
@@ -36,17 +36,9 @@ namespace Portal.Patient.Services
             //TODO: wire up to API
             //call a put on the PatientInterventionTable.
             //return success or fail.
-            private bool success = true;
-            if (success)
-            {
-                Snackbar.Add("Successfully enrolled in the intervention!", Severity.Success);
-            }
-            else
-            {
-                Snackbar.Add("Failed to enroll in the intervention.", Severity.Error);
-            }
+            bool success = true;
+            
             return true;
         }
 
     }
-}
