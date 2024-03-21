@@ -3,6 +3,7 @@ using Portal.Patient.Constants;
 using Portal.Patient.Interfaces;
 using Portal.Patient.Services;
 using System.Collections.ObjectModel;
+using Data.Models;
 namespace Portal.Patient.Pages;
 
 
@@ -10,16 +11,17 @@ public partial class Notifications : ComponentBase
 {
     private const string PageName = "Notifications";
 
-    private IEnumerable<INotification> _newNotifications { get; set; }
+    private IEnumerable<Notification> _newNotifications { get; set; }
         
     private IReadOnlyDictionary<int, string> _notificationLinkByTypeID = new ReadOnlyDictionary<int, string>(new Dictionary<int, string>() {
         { (int)NotificationTypeID.RecommendedIntervention, "SuggestedInterventions" }
     });
 
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        _newNotifications = _notificationService.GetForCurrentUser();
+        var result = await _notificationService.Get("1");
+        Console.WriteLine(result.Id);
         base.OnInitialized();
     }
 }

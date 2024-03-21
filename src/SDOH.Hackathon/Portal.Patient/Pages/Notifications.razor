@@ -2,24 +2,25 @@
 @using System.Collections.ObjectModel
 @using Portal.Patient.Constants
 @using Portal.Patient.Interfaces
-@inject INotificationService _notificationService
+@using Data.Models
+@inject IIdentifiedService<Notification> _notificationService
 
 <MudText Typo="Typo.h4">Notifications</MudText>
 
-<div hidden="@(!_newNotifications.Any())">
+@* <div hidden="@(!_newNotifications.Any())">
     <MudText Typo="Typo.h5" Class="mt-4">New</MudText>
     <MudList Clickable="true">
         @foreach (var notification in _newNotifications)
         {
             var hasLink = NotificationLinkByTypeID.ContainsKey(notification.NotificationTypeID);
             <MudListItem Class="align-content-center" Href="@(hasLink ? NotificationLinkByTypeID[notification.NotificationTypeID] : "#")">
-                @notification.Message
+                "@notification.Message"
                 <MudIcon hidden="@(!hasLink)" Class="justify-end" Style="float:right" Icon="@Icons.Material.Filled.ChevronRight"></MudIcon>
             </MudListItem>
             <MudDivider />
         }
     </MudList>
-</div>
+</div> *@
 
 @code {
     private IReadOnlyDictionary<int, string> NotificationLinkByTypeID = new ReadOnlyDictionary<int, string>(new Dictionary
