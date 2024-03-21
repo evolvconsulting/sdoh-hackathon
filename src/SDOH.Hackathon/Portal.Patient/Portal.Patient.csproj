@@ -21,4 +21,8 @@
     <Folder Include="Components\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\SDOH.Hackathon.PortalAPI\Portal.API\Data\Data.csproj" />
+  </ItemGroup>
+
 </Project>
