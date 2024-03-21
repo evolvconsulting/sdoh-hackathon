@@ -21,6 +21,4 @@ public partial class Notification : IIdentified
     public DateTime? ReadDate { get; set; }
 
     public long? IsDeleted { get; set; }
-
-    public string? InterventionId { get; set; }
 }

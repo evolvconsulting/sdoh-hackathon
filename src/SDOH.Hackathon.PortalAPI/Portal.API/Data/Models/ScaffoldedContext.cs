@@ -15,9 +15,13 @@ public partial class ScaffoldedContext : DbContext
     {
     }
 
+    public virtual DbSet<HighRiskQc> HighRiskQcs { get; set; }
+
     public virtual DbSet<Intervention> Interventions { get; set; }
 
     public virtual DbSet<InterventionResource> InterventionResources { get; set; }
+
+    public virtual DbSet<MappingTable> MappingTables { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
@@ -40,6 +44,66 @@ public partial class ScaffoldedContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("PUBLIC");
+
+        modelBuilder.Entity<HighRiskQc>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("HIGH_RISK_QC");
+
+            entity.Property(e => e.Address).HasColumnName("ADDRESS");
+            entity.Property(e => e.Birthdate).HasColumnName("BIRTHDATE");
+            entity.Property(e => e.Birthplace).HasColumnName("BIRTHPLACE");
+            entity.Property(e => e.City).HasColumnName("CITY");
+            entity.Property(e => e.Code)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("CODE");
+            entity.Property(e => e.County).HasColumnName("COUNTY");
+            entity.Property(e => e.Deathdate).HasColumnName("DEATHDATE");
+            entity.Property(e => e.Description).HasColumnName("DESCRIPTION");
+            entity.Property(e => e.Drivers).HasColumnName("DRIVERS");
+            entity.Property(e => e.Encounter).HasColumnName("ENCOUNTER");
+            entity.Property(e => e.Ethnicity).HasColumnName("ETHNICITY");
+            entity.Property(e => e.Fips)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("FIPS");
+            entity.Property(e => e.First).HasColumnName("FIRST");
+            entity.Property(e => e.Gender).HasColumnName("GENDER");
+            entity.Property(e => e.HealthcareCoverage)
+                .HasColumnType("NUMBER(38,2)")
+                .HasColumnName("HEALTHCARE_COVERAGE");
+            entity.Property(e => e.HealthcareExpenses)
+                .HasColumnType("NUMBER(38,2)")
+                .HasColumnName("HEALTHCARE_EXPENSES");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Income)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("INCOME");
+            entity.Property(e => e.Last).HasColumnName("LAST");
+            entity.Property(e => e.Lat)
+                .HasColumnType("NUMBER(38,15)")
+                .HasColumnName("LAT");
+            entity.Property(e => e.Lon)
+                .HasColumnType("NUMBER(38,14)")
+                .HasColumnName("LON");
+            entity.Property(e => e.Maiden).HasColumnName("MAIDEN");
+            entity.Property(e => e.Marital).HasColumnName("MARITAL");
+            entity.Property(e => e.Passport).HasColumnName("PASSPORT");
+            entity.Property(e => e.Patient).HasColumnName("PATIENT");
+            entity.Property(e => e.Prefix).HasColumnName("PREFIX");
+            entity.Property(e => e.Race).HasColumnName("RACE");
+            entity.Property(e => e.Smoker)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("SMOKER");
+            entity.Property(e => e.Ssn).HasColumnName("SSN");
+            entity.Property(e => e.StartTime).HasColumnName("START_TIME");
+            entity.Property(e => e.State).HasColumnName("STATE");
+            entity.Property(e => e.Stop).HasColumnName("STOP");
+            entity.Property(e => e.Suffix).HasColumnName("SUFFIX");
+            entity.Property(e => e.Zip)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("ZIP");
+        });
 
         modelBuilder.Entity<Intervention>(entity =>
         {
@@ -66,9 +130,26 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.Url).HasColumnName("URL");
         });
 
+        modelBuilder.Entity<MappingTable>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_3f014d86-a52e-497a-a489-7446d758cf78");
+
+            entity.ToTable("MAPPING_TABLE");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.InterventionId)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("INTERVENTION_ID");
+            entity.Property(e => e.NotificationId)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("NOTIFICATION_ID");
+            entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
+            entity.Property(e => e.PatientInterventionNotification).HasColumnName("PATIENT_INTERVENTION_NOTIFICATION");
+        });
+
         modelBuilder.Entity<Notification>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_70ff47d3-b764-4e03-96b6-b8b45d7ecba5");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_adb2d237-1d76-4342-a634-f64bd796de83");
 
             entity.ToTable("NOTIFICATION");
 
@@ -77,7 +158,6 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.InsertDate)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP()")
                 .HasColumnName("INSERT_DATE");
-            entity.Property(e => e.InterventionId).HasColumnName("INTERVENTION_ID");
             entity.Property(e => e.IsDeleted)
                 .HasColumnType("NUMBER(38,0)")
                 .HasColumnName("IS_DELETED");
@@ -102,9 +182,12 @@ public partial class ScaffoldedContext : DbContext
         {
             entity
                 .HasNoKey()
-                .ToTable("PATIENTS", "PUBLIC");
+                .ToTable("PATIENTS");
 
             entity.Property(e => e.Address).HasColumnName("ADDRESS");
+            entity.Property(e => e.AllowsPushNotifications)
+                .HasColumnType("NUMBER(38,0)")
+                .HasColumnName("ALLOWS_PUSH_NOTIFICATIONS");
             entity.Property(e => e.Birthdate).HasColumnName("BIRTHDATE");
             entity.Property(e => e.Birthplace).HasColumnName("BIRTHPLACE");
             entity.Property(e => e.City).HasColumnName("CITY");
@@ -168,12 +251,13 @@ public partial class ScaffoldedContext : DbContext
 
         modelBuilder.Entity<PatientIntervention>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_e7bb0303-7d82-4e8d-bf83-02a04bcc1cf5");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_cae5418c-68fa-4fc7-b548-1690b7a471e8");
 
             entity.ToTable("PATIENT_INTERVENTION");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.EnrolledDate).HasColumnName("ENROLLED_DATE");
+            entity.Property(e => e.InterventionId).HasColumnName("INTERVENTION_ID");
             entity.Property(e => e.IsManual)
                 .HasColumnType("NUMBER(38,0)")
                 .HasColumnName("IS_MANUAL");
@@ -196,13 +280,14 @@ public partial class ScaffoldedContext : DbContext
 
         modelBuilder.Entity<PatientRiskLevel>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_10db278d-71ae-497e-b04f-34ba59caa38e");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_fb14d66d-fe24-4a41-9e88-9c4592e8deab");
 
             entity.ToTable("PATIENT_RISK_LEVEL");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.FromDate).HasColumnName("FROM_DATE");
             entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
+            entity.Property(e => e.RiskLevelId).HasColumnName("RISK_LEVEL_ID");
             entity.Property(e => e.ToDate).HasColumnName("TO_DATE");
         });
 
@@ -219,12 +304,13 @@ public partial class ScaffoldedContext : DbContext
 
         modelBuilder.Entity<RiskLevelIntervention>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_4377a99b-3132-4df5-b296-12cff5d32a36");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_d4979825-aeb2-444e-9aa2-a51efed26040");
 
             entity.ToTable("RISK_LEVEL_INTERVENTION");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.InterventionId).HasColumnName("INTERVENTION_ID");
+            entity.Property(e => e.RiskLevelId).HasColumnName("RISK_LEVEL_ID");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -10,6 +10,8 @@ public partial class PatientIntervention : IIdentified
 
     public string? PatientId { get; set; }
 
+    public string? InterventionId { get; set; }
+
     public string? StatusId { get; set; }
 
     public long? IsManual { get; set; }

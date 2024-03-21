@@ -10,6 +10,8 @@ public partial class PatientRiskLevel : IIdentified
 
     public string PatientId { get; set; } = null!;
 
+    public string RiskLevelId { get; set; } = null!;
+
     public DateOnly FromDate { get; set; }
 
     public DateOnly ToDate { get; set; }
