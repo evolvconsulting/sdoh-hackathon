@@ -67,8 +67,8 @@ public abstract class BaseService<T> : IIdentifiedService<T>
 
         using (var client = _clientFactory.CreateClient())
         { 
-            var endpointUrl = $"{_controllerRoute}/{((IIdentified)entity).Id}";
-
+            var endpointUrl = $"{_controllerRoute}/put";
+           
             // Send the PUT request
             var response = await client.PutAsync(endpointUrl, httpContent);
 
