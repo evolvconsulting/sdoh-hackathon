@@ -1,8 +1,7 @@
 
-namespace dotnet8.Services;
+namespace Portal.API.Services;
 
 using System.Text.Json;
-using Data;
 using Data.Models;
 using WebPush;
 

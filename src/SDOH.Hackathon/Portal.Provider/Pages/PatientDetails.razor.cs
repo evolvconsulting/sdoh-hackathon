@@ -4,7 +4,7 @@ using Portal.Provider.Services;
 
 namespace Portal.Provider.Pages;
 
-public partial class Patient : ComponentBase
+public partial class PatientDetails : ComponentBase
 {
     [Parameter]
     public string Id { get; set; }

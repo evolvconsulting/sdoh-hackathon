@@ -1,30 +1,33 @@
+using Data.Models;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using Portal.Provider.Interfaces;
-using Portal.Provider.Repositories;
 using Portal.Provider.Services;
-using Portal.Provider.ViewModels;
 
-namespace Portal.Provider
+namespace Portal.Provider;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
-        {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
-            builder.RootComponents.Add<HeadOutlet>("head::after");
+        var builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.RootComponents.Add<App>("#app");
+        builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            builder.Services.AddMudServices();
+        builder.Services.AddMudServices();
 
+        builder.Services.AddSingleton<AppBarService>();
+        builder.Services.AddSingleton<IIdentifiedService<Patient>, PatientDataService>();
 
-            builder.Services.AddSingleton<IRepository<Patient>, PatientRepository>();
-            builder.Services.AddSingleton<IDataService<Patient>, PatientDataService>();
-            builder.Services.AddSingleton<AppBarService>();
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+        builder.Services.AddHttpClient(
+            "genericClientFactory",
+            client =>
+            {
+                // Set the base address of the named client.
+                client.BaseAddress = new Uri("https://localhost:56786");
+            });
 
-            await builder.Build().RunAsync();
-        }
+        await builder.Build().RunAsync();
     }
 }

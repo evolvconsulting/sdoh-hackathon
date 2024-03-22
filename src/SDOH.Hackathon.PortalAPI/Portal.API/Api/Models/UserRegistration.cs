@@ -1,5 +1,5 @@
 
-namespace dotnet8.Models
+namespace Portal.API.Models
 {
     public class UserRegistrationEntity{
         public int Id { get; set; }

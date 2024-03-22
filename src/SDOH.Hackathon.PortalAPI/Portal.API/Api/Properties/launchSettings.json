@@ -1,8 +1,9 @@
 {
   "profiles": {
-    "dotnet8": {
+    "Portal.API": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

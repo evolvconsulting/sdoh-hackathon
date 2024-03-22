@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Portal.Patient.Constants;
-using Portal.Patient.Interfaces;
-using Portal.Patient.Services;
 using System.Collections.ObjectModel;
 using Data.Models;
 namespace Portal.Patient.Pages;

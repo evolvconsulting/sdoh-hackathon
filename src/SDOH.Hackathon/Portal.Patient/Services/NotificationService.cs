@@ -1,6 +1,4 @@
 ﻿using Microsoft.JSInterop;
-using Portal.Patient.Constants;
-using Portal.Patient.Interfaces;
 using Data.Models;
 
 namespace Portal.Patient.Services;

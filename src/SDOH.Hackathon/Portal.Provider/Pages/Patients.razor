@@ -17,7 +17,7 @@
 
                 if (!string.IsNullOrWhiteSpace(FilteredPatientName))
                 {
-                    var result = PatientList.Where(patient => $"{patient.LastName}, {patient.FirstName} {patient.MiddleInitial}.".Contains(FilteredPatientName)).ToList();
+                    var result = PatientList.Where(patient => $"{patient.Last}, {patient.First}".Contains(FilteredPatientName)).ToList();
 
                     if (result != null && result.Count > 0)
                         filteredList = result;
@@ -28,10 +28,10 @@
 
                     <MudListItem OnClick="@(() => Navigation.NavigateTo($"/patients/{patient.Id}"))">
                         <MudStack Spacing="4">
-                            <MudText Typo="Typo.h4">@($"{patient.LastName}, {patient.FirstName} {patient.MiddleInitial}.")</MudText>
+                            <MudText Typo="Typo.h4">@($"{patient.Last}, {patient.First}")</MudText>
                             <MudStack Spacing="8" Row=true>
-                                <MudChip Size="Size.Large" Color="Color.Default" Style="font-size:25px">@($"DOB: {@patient.DateOfBirth.ToString("MM/dd/yyyy")}")</MudChip>
-
+                                <MudChip Size="Size.Large" Color="Color.Default" Style="font-size:25px">@($"DOB: {@patient.Birthdate?.ToString("MM/dd/yyyy")}")</MudChip>
+@* 
                                 @if (patient.Interventions.Count == 0)
                                 {
                                     <MudChip Size="Size.Large" Color="Color.Success" Style="font-size:25px">0 Interventions to Review </MudChip>
@@ -41,7 +41,7 @@
                                     <MudChip Size="Size.Large" Color="Color.Error" Style="font-size:25px">@($"{patient.Interventions.Count} Interventions to Review")</MudChip>
                                 }
 
-                                <MudChip Size="Size.Large" Color="Color.Info" Style="font-size:25px">@patient.RiskLevel</MudChip>
+                                <MudChip Size="Size.Large" Color="Color.Info" Style="font-size:25px">@patient.RiskLevel</MudChip> *@
                             </MudStack>
                         </MudStack>
                     </MudListItem>
