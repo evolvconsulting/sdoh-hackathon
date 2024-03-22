@@ -7,6 +7,7 @@ using Microsoft.Extensions.Http;
 using Google.Apis.Auth.OAuth2.Responses;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace Portal.Patient.Services;
 
@@ -59,10 +60,22 @@ public abstract class BaseService<T> : IIdentifiedService<T>
     public async virtual Task<bool> Put(T entity)
     {
         var wasSuccessful = false;
+
+        // Serialize the entity to JSON
+        var jsonContent = JsonConvert.SerializeObject(entity);
+        var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
         using (var client = _clientFactory.CreateClient())
-        {
-            //var tokenResponse = await client.PostAsync($"{_baseUri}", ));
+        { 
+            var endpointUrl = $"{_controllerRoute}/{((IIdentified)entity).Id}";
+
+            // Send the PUT request
+            var response = await client.PutAsync(endpointUrl, httpContent);
+
+            // Check if the response indicates success
+            wasSuccessful = response.IsSuccessStatusCode;
         }
+
         return wasSuccessful;
     }
 
