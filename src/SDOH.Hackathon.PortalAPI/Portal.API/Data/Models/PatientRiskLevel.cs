@@ -1,4 +1,6 @@
 ﻿using Data.Interfaces;
+using System;
+using System.Collections.Generic;
 
 namespace Data.Models;
 
@@ -10,7 +12,7 @@ public partial class PatientRiskLevel : IIdentified
 
     public string RiskLevelId { get; set; } = null!;
 
-    public DateOnly FromDate { get; set; }
+    public DateOnly? FromDate { get; set; }
 
-    public DateOnly ToDate { get; set; }
+    public DateOnly? ToDate { get; set; }
 }
