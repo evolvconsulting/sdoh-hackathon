@@ -1,4 +1,6 @@
 ﻿using Data.Interfaces;
+using Data.Models;
+
 namespace Portal.Patient.Interfaces;
 
 public interface IIdentifiedService<T>

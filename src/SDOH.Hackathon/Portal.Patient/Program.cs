@@ -20,7 +20,6 @@ namespace Portal.Patient
             builder.Services.AddSingleton<IIdentifiedService<Patient>, PatientService>();
             builder.Services.AddSingleton<IIdentifiedService<NotificationType>, NotificationTypeService>();
             builder.Services.AddSingleton<IIdentifiedService<PatientInterventionNotification>, PatientInterventionNotificationService>();
-            builder.Services.AddSingleton<IIdentifiedService<PatientIntervention>, PatientInterventionService>();
             builder.Services.AddSingleton<IIdentifiedService<PatientRiskFactor>, PatientRiskFactorService>();
             builder.Services.AddSingleton<IIdentifiedService<PatientRiskLevel>, PatientRiskLevelService>();
             builder.Services.AddSingleton<IIdentifiedService<RiskFactorGroup>, RiskFactorGroupService>();
@@ -29,6 +28,7 @@ namespace Portal.Patient
             builder.Services.AddSingleton<IIdentifiedService<RiskLevel>, RiskLevelService>();
             builder.Services.AddSingleton<IIdentifiedService<Notification>, NotificationService>();
             builder.Services.AddSingleton<IIdentifiedService<Intervention>, InterventionService>();
+            builder.Services.AddSingleton<IPatientRelatedService<PatientIntervention>, PatientInterventionService>();
             builder.Services.AddSingleton<IIdentifiedService<InterventionResource>, InterventionResourceService>();
 
 
@@ -37,7 +37,7 @@ namespace Portal.Patient
                 client =>
                 {
                     // Set the base address of the named client.
-                    client.BaseAddress = new Uri("https://localhost:7011/");
+                    client.BaseAddress = new Uri("https://localhost:56786");
 
                 });
 

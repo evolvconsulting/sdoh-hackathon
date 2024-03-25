@@ -1,4 +1,48 @@
-﻿//using MudBlazor;
+﻿using Portal.Patient.Constants;
+using System.Collections.ObjectModel;
+using Data.Models;
+
+namespace Portal.Patient.Pages;
+
+
+public partial class SuggestedInterventions
+{
+    private const string PageName = "SuggestedInterventions";
+
+    private IEnumerable<SuggestedInterventions> _newSuggestedInterventions { get; set; }
+
+    private IReadOnlyDictionary<int, string> _notificationLinkByTypeID = new ReadOnlyDictionary<int, string>(new Dictionary<int, string>() {
+        { (int)NotificationTypeID.RecommendedIntervention, "SuggestedInterventions" }
+    });
+
+    protected override async Task OnInitializedAsync()
+    {
+        string patientId = "f80611ed-5998-e2d3-060f-159138f8815e";
+        var result = await _SuggestedInterventionService.GetByPatient(patientId);
+        Console.WriteLine(result);
+        Enroll(result.FirstOrDefault());
+        OptOut(result.FirstOrDefault());
+        base.OnInitialized();
+    }
+
+    protected async Task Enroll(PatientIntervention patientIntervention)
+    {
+        patientIntervention.EnrolledDate = DateTime.Now;
+        var wasSuccesful = await _SuggestedInterventionService.Put(patientIntervention);
+        Console.WriteLine(wasSuccesful);
+        Console.WriteLine("Enrolled successfully!");
+    }
+
+    protected async Task OptOut(PatientIntervention patientIntervention)
+    {
+        patientIntervention.OptOutDate = DateTime.Now;
+        var wasSuccesful = await _SuggestedInterventionService.Put(patientIntervention);
+        Console.WriteLine(wasSuccesful);
+        Console.WriteLine("Opted-Out Successfully!");
+    }
+
+}
+//using MudBlazor;
 //using Portal.Patient.Interfaces;
 //using Portal.Patient.Services;
 
