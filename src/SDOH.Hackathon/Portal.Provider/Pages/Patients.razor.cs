@@ -7,23 +7,23 @@ using Portal.Provider.Services;
 public partial class Patients
 {
     [Inject]
-    public required IDataService<ViewModels.Patient> PatientService { get; set; }
+    public required IIdentifiedService<Data.Models.Patient> PatientService { get; set; }
 
     [Inject]
     public required AppBarService AppBarService { get; set; }
 
     public string? FilteredPatientName { get; set; }
 
-    public List<ViewModels.Patient>? PatientList { get; set; }
+    public List<Data.Models.Patient>? PatientList { get; set; }
 
     private const string PageName = "Patients";
 
     private bool resetValueOnEmptyText;
     private bool coerceText;
     private bool coerceValue;
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        PatientList = PatientService.GetAll();
+        PatientList = (await PatientService.GetAll()).ToList();
         AppBarService.SetSettings(PageName);
     }
 
@@ -39,9 +39,9 @@ public partial class Patients
             StateHasChanged();
             return new List<string>();
         }
-        return PatientList.Where(x => $"{x.LastName}, {x.FirstName} {x.MiddleInitial}."
+        return PatientList.Where(x => $"{x.Last}, {x.First}"
             .Contains(value, StringComparison.InvariantCultureIgnoreCase))
-            .Select(x => $"{x.LastName}, {x.FirstName} {x.MiddleInitial}.")
+            .Select(x => $"{x.Last}, {x.First}")
             .ToList();
     }
 }

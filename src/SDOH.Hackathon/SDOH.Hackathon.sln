@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.Patient", "Portal.Pa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\SDOH.Hackathon.PortalAPI\Portal.API\Data\Data.csproj", "{60942CFF-E2B2-419D-86FB-EF956235176B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet8", "..\SDOH.Hackathon.PortalAPI\Portal.API\Api\dotnet8.csproj", "{BE5EC5E6-55A6-42B0-AA3C-CFC9CC3499B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.API", "..\SDOH.Hackathon.PortalAPI\Portal.API\Api\Portal.API.csproj", "{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,11 @@ Global
 		{60942CFF-E2B2-419D-86FB-EF956235176B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60942CFF-E2B2-419D-86FB-EF956235176B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60942CFF-E2B2-419D-86FB-EF956235176B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE5EC5E6-55A6-42B0-AA3C-CFC9CC3499B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE5EC5E6-55A6-42B0-AA3C-CFC9CC3499B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE5EC5E6-55A6-42B0-AA3C-CFC9CC3499B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE5EC5E6-55A6-42B0-AA3C-CFC9CC3499B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,13 +1,10 @@
 
-using dotnet8.Interfaces;
-using dotnet8.Models;
-using Microsoft.AspNetCore.Mvc;
-using static System.Net.Mime.MediaTypeNames;
+using Portal.API.Interfaces;
+using Portal.API.Models;
 using Newtonsoft.Json;
-using System.Text;
 
 
-namespace dotnet8.Services
+namespace Portal.API.Services
 {
     public class AuthService : IAuthService
     {

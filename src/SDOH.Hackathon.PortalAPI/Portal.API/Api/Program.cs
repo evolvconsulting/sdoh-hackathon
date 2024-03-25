@@ -1,17 +1,7 @@
 // using Microsoft.AspNetCore.Authentication.Cookies;
 // using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-using dotnet8.Interfaces;
-using dotnet8.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,10 +11,15 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-        policy  =>
+        policy =>
         {
-            policy.WithOrigins("https://localhost:51700", //frontend
-                                "https://localhost:7011") //backend aka this
+            policy.WithOrigins("https://localhost:51701",
+                                "http://localhost:39856",
+                                "http://localhost:5238",
+                                "https://localhost:7217",
+                                "https://localhost:44362",//frontend
+                                "https://localhost:7011",
+                                "https://localhost:56787") //backend aka this
                                 .AllowAnyMethod().AllowAnyHeader();
         });
 });
@@ -109,6 +104,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//app.UseCors(x => x
+//            .AllowAnyOrigin()
+//            .AllowAnyMethod()
+//            .AllowAnyHeader());
 
 app.UseCors(MyAllowSpecificOrigins);
 

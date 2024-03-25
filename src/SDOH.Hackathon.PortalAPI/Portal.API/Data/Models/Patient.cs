@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Data.Interfaces;
+using System;
 using System.Collections.Generic;
-using Data.Interfaces;
 
 namespace Data.Models;
 

@@ -21,8 +21,6 @@ public partial class ScaffoldedContext : DbContext
 
     public virtual DbSet<InterventionResource> InterventionResources { get; set; }
 
-    public virtual DbSet<MappingTable> MappingTables { get; set; }
-
     public virtual DbSet<Notification> Notifications { get; set; }
 
     public virtual DbSet<NotificationType> NotificationTypes { get; set; }
@@ -33,9 +31,15 @@ public partial class ScaffoldedContext : DbContext
 
     public virtual DbSet<PatientIntervention> PatientInterventions { get; set; }
 
+    public virtual DbSet<PatientInterventionNotification> PatientInterventionNotifications { get; set; }
+
     public virtual DbSet<PatientRiskFactor> PatientRiskFactors { get; set; }
 
     public virtual DbSet<PatientRiskLevel> PatientRiskLevels { get; set; }
+
+    public virtual DbSet<RiskFactor> RiskFactors { get; set; }
+
+    public virtual DbSet<RiskFactorGroup> RiskFactorGroups { get; set; }
 
     public virtual DbSet<RiskLevel> RiskLevels { get; set; }
 
@@ -109,7 +113,7 @@ public partial class ScaffoldedContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_8385a574-2f6f-4b9a-837f-474298ad36dd");
 
-            entity.ToTable("INTERVENTION");
+            entity.ToTable("INTERVENTION", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Description).HasColumnName("DESCRIPTION");
@@ -118,9 +122,9 @@ public partial class ScaffoldedContext : DbContext
 
         modelBuilder.Entity<InterventionResource>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_3bd07cf1-098c-4526-86d8-b078d22844b0");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_a22519b8-b2f2-42c9-b7ec-18a3bcd2ef55");
 
-            entity.ToTable("INTERVENTION_RESOURCE");
+            entity.ToTable("INTERVENTION_RESOURCE", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Document).HasColumnName("DOCUMENT");
@@ -130,28 +134,11 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.Url).HasColumnName("URL");
         });
 
-        modelBuilder.Entity<MappingTable>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_3f014d86-a52e-497a-a489-7446d758cf78");
-
-            entity.ToTable("MAPPING_TABLE");
-
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.InterventionId)
-                .HasColumnType("NUMBER(38,0)")
-                .HasColumnName("INTERVENTION_ID");
-            entity.Property(e => e.NotificationId)
-                .HasColumnType("NUMBER(38,0)")
-                .HasColumnName("NOTIFICATION_ID");
-            entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
-            entity.Property(e => e.PatientInterventionNotification).HasColumnName("PATIENT_INTERVENTION_NOTIFICATION");
-        });
-
         modelBuilder.Entity<Notification>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_adb2d237-1d76-4342-a634-f64bd796de83");
 
-            entity.ToTable("NOTIFICATION");
+            entity.ToTable("NOTIFICATION", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.DeliveredDate).HasColumnName("DELIVERED_DATE");
@@ -171,7 +158,7 @@ public partial class ScaffoldedContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_b34de94c-3d87-40cf-825e-69a66ab55a09");
 
-            entity.ToTable("NOTIFICATION_TYPE");
+            entity.ToTable("NOTIFICATION_TYPE", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Name).HasColumnName("NAME");
@@ -251,9 +238,9 @@ public partial class ScaffoldedContext : DbContext
 
         modelBuilder.Entity<PatientIntervention>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_cae5418c-68fa-4fc7-b548-1690b7a471e8");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_469e832a-dd88-433b-b0c1-1da76988cb43");
 
-            entity.ToTable("PATIENT_INTERVENTION");
+            entity.ToTable("PATIENT_INTERVENTION", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.EnrolledDate).HasColumnName("ENROLLED_DATE");
@@ -267,22 +254,34 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.StatusId).HasColumnName("STATUS_ID");
         });
 
+        modelBuilder.Entity<PatientInterventionNotification>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_b1d9f573-d359-421a-be19-da18019fee4f");
+
+            entity.ToTable("PATIENT_INTERVENTION_NOTIFICATION", "PUBLIC");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.NotificationId).HasColumnName("NOTIFICATION_ID");
+            entity.Property(e => e.PatientInterventionId).HasColumnName("PATIENT_INTERVENTION_ID");
+        });
+
         modelBuilder.Entity<PatientRiskFactor>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_90026470-08b8-4172-9285-590c32f0c9cc");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_d11f692c-9222-4f5b-b9de-c4019150a9a7");
 
-            entity.ToTable("PATIENT_RISK_FACTOR");
+            entity.ToTable("PATIENT_RISK_FACTOR", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.PatientId).HasColumnName("PATIENT_ID");
+            entity.Property(e => e.RiskFactorId).HasColumnName("RISK_FACTOR_ID");
             entity.Property(e => e.Value).HasColumnName("VALUE");
         });
 
         modelBuilder.Entity<PatientRiskLevel>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_fb14d66d-fe24-4a41-9e88-9c4592e8deab");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_16155c98-d727-4860-aed2-9013c78d5937");
 
-            entity.ToTable("PATIENT_RISK_LEVEL");
+            entity.ToTable("PATIENT_RISK_LEVEL", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.FromDate).HasColumnName("FROM_DATE");
@@ -291,11 +290,33 @@ public partial class ScaffoldedContext : DbContext
             entity.Property(e => e.ToDate).HasColumnName("TO_DATE");
         });
 
+        modelBuilder.Entity<RiskFactor>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_cae1c3a4-c10c-4c82-8d43-26ad3fc490e1");
+
+            entity.ToTable("RISK_FACTOR", "PUBLIC");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Name).HasColumnName("NAME");
+            entity.Property(e => e.RiskFactorGroupId).HasColumnName("RISK_FACTOR_GROUP_ID");
+        });
+
+        modelBuilder.Entity<RiskFactorGroup>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_da4b05b4-2189-4ff7-85f6-747ce46dbca8");
+
+            entity.ToTable("RISK_FACTOR_GROUP", "PUBLIC");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Description).HasColumnName("DESCRIPTION");
+            entity.Property(e => e.Name).HasColumnName("NAME");
+        });
+
         modelBuilder.Entity<RiskLevel>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_5c0f95bf-a0a3-467c-94a0-8d53e105592c");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_dbca300f-0e41-4b67-828e-0520aa2d795f");
 
-            entity.ToTable("RISK_LEVEL");
+            entity.ToTable("RISK_LEVEL", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Name).HasColumnName("NAME");
@@ -304,9 +325,9 @@ public partial class ScaffoldedContext : DbContext
 
         modelBuilder.Entity<RiskLevelIntervention>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_d4979825-aeb2-444e-9aa2-a51efed26040");
+            entity.HasKey(e => e.Id).HasName("SYS_CONSTRAINT_f39324af-ad3e-4be9-9476-ce689e4aa798");
 
-            entity.ToTable("RISK_LEVEL_INTERVENTION");
+            entity.ToTable("RISK_LEVEL_INTERVENTION", "PUBLIC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.InterventionId).HasColumnName("INTERVENTION_ID");

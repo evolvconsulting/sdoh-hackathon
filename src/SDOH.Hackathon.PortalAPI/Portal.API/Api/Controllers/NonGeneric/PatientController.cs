@@ -1,20 +1,14 @@
-﻿using Data;
-using dotnet8.Models;
-using dotnet8.Interfaces;
-using Microsoft.AspNetCore.Mvc;
-using static System.Net.Mime.MediaTypeNames;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using Data.Models;
-using Data.Interfaces;
-using System.Text;
 
-namespace dotnet8.Controllers
+namespace Portal.API.Controllers.NonGeneric
 {
     [ApiController]
     [Route("patients")]
     public class PatientController : BaseController<Patient>
     {
-        public PatientController(ScaffoldedContext context, IConfiguration configuration) : base(context, configuration) { 
+        public PatientController(ScaffoldedContext context, IConfiguration configuration) : base(context, configuration)
+        {
         }
 
         // [HttpPut]
@@ -91,7 +85,7 @@ namespace dotnet8.Controllers
         //         System.Text.Json.JsonSerializer.Serialize(userRepresentation),
         //         Encoding.UTF8,
         //         Application.Json); 
-            
+
         //     return postContent;
         // }
 

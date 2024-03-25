@@ -1,5 +1,5 @@
 
-namespace dotnet8.Interfaces
+namespace Portal.API.Interfaces
 {
     public interface IAuthService
     {

@@ -1,14 +1,11 @@
-﻿using Microsoft.JSInterop;
-using MudBlazor;
-using Portal.Patient.Interfaces;
+using Microsoft.JSInterop;
 using Data.Models;
 
 namespace Portal.Patient.Services;
 
 public class InterventionService : BaseService<Intervention>
 {
-    public InterventionService(IJSRuntime JSRuntime, IHttpClientFactory clientFactory) : base(JSRuntime, clientFactory, "interventions")
+    public InterventionService(IHttpClientFactory clientFactory) : base(clientFactory, "interventions")
     {
     }
-
 }
