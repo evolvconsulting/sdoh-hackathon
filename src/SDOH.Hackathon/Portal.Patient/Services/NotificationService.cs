@@ -6,7 +6,7 @@ namespace Portal.Patient.Services;
 
 public class NotificationService : BaseService<Notification>
 {
-    public NotificationService(IJSRuntime JSRuntime, IHttpClientFactory clientFactory) : base(JSRuntime, clientFactory, "notifications")
+    public NotificationService(IHttpClientFactory clientFactory) : base(clientFactory, "notifications")
     {
     }
 

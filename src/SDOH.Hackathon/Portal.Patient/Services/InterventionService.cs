@@ -5,7 +5,7 @@ namespace Portal.Patient.Services;
 
 public class InterventionService : BaseService<Intervention>
 {
-    public InterventionService(IJSRuntime JSRuntime, IHttpClientFactory clientFactory) : base(JSRuntime, clientFactory, "interventions")
+    public InterventionService(IHttpClientFactory clientFactory) : base(clientFactory, "interventions")
     {
     }
 }

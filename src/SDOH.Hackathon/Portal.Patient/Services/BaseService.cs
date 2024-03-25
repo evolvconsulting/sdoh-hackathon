@@ -12,13 +12,11 @@ namespace Portal.Patient.Services;
 public abstract class BaseService<T> : IIdentifiedService<T>
     where T : class, IIdentified
 {
-    private readonly IJSRuntime _JSRuntime;
-    private IHttpClientFactory _clientFactory;
+    protected IHttpClientFactory _clientFactory;
     protected readonly string _controllerRoute;
 
-    public BaseService(IJSRuntime JSRuntime, IHttpClientFactory clientFactory, string controllerRoute)
+    public BaseService(IHttpClientFactory clientFactory, string controllerRoute)
     {
-        _JSRuntime = JSRuntime;
         _clientFactory = clientFactory;
         _controllerRoute = controllerRoute;
     }

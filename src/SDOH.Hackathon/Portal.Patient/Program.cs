@@ -17,8 +17,19 @@ namespace Portal.Patient
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddMudServices();
+            builder.Services.AddSingleton<IIdentifiedService<Patient>, PatientService>();
+            builder.Services.AddSingleton<IIdentifiedService<NotificationType>, NotificationTypeService>();
+            builder.Services.AddSingleton<IIdentifiedService<PatientInterventionNotification>, PatientInterventionNotificationService>();
+            builder.Services.AddSingleton<IIdentifiedService<PatientIntervention>, PatientInterventionService>();
+            builder.Services.AddSingleton<IIdentifiedService<PatientRiskFactor>, PatientRiskFactorService>();
+            builder.Services.AddSingleton<IIdentifiedService<PatientRiskLevel>, PatientRiskLevelService>();
+            builder.Services.AddSingleton<IIdentifiedService<RiskFactorGroup>, RiskFactorGroupService>();
+            builder.Services.AddSingleton<IIdentifiedService<RiskFactor>, RiskFactorService>();
+            builder.Services.AddSingleton<IIdentifiedService<RiskLevelIntervention>, RiskLevelInterventionService>();
+            builder.Services.AddSingleton<IIdentifiedService<RiskLevel>, RiskLevelService>();
             builder.Services.AddSingleton<IIdentifiedService<Notification>, NotificationService>();
             builder.Services.AddSingleton<IIdentifiedService<Intervention>, InterventionService>();
+            builder.Services.AddSingleton<IIdentifiedService<InterventionResource>, InterventionResourceService>();
 
 
             builder.Services.AddHttpClient(
