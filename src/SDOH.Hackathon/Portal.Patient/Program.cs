@@ -4,6 +4,7 @@ using MudBlazor.Services;
 using Portal.Patient.Interfaces;
 using Portal.Patient.Services;
 using Data.Models;
+using Microsoft.Extensions.Http;
 
 namespace Portal.Patient
 {
