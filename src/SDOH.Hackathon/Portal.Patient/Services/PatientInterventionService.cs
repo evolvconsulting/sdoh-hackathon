@@ -8,7 +8,7 @@ namespace Portal.Patient.Services;
 
 public class PatientInterventionService : BaseService<PatientIntervention>, IPatientRelatedService<PatientIntervention>
 {
-    public PatientInterventionService(IJSRuntime JSRuntime, IHttpClientFactory clientFactory) : base(JSRuntime, clientFactory, "patient-interventions")
+    public PatientInterventionService(IHttpClientFactory clientFactory) : base(clientFactory, "patient-interventions")
     {
     }
 

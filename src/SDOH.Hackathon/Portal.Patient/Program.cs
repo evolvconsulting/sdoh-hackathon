@@ -17,7 +17,7 @@ namespace Portal.Patient
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddMudServices();
-            builder.Services.AddSingleton<IIdentifiedService<Patient>, PatientService>();
+            builder.Services.AddSingleton<IIdentifiedService<Data.Models.Patient>, PatientService>();
             builder.Services.AddSingleton<IIdentifiedService<NotificationType>, NotificationTypeService>();
             builder.Services.AddSingleton<IIdentifiedService<PatientInterventionNotification>, PatientInterventionNotificationService>();
             builder.Services.AddSingleton<IIdentifiedService<PatientRiskFactor>, PatientRiskFactorService>();
