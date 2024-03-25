@@ -23,7 +23,7 @@ public partial class Patients
     private bool coerceValue;
     protected override async Task OnInitializedAsync()
     {
-        PatientList = await PatientService.Get();
+        PatientList = (await PatientService.GetAll()).ToList();
         AppBarService.SetSettings(PageName);
     }
 

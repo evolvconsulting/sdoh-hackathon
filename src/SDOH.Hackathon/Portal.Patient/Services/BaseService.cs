@@ -3,6 +3,8 @@ using Portal.Patient.Interfaces;
 //using Portal.Patient.Models;
 using Data.Interfaces;
 using Newtonsoft.Json;
+using System.Text;
+using System.Net.Http;
 
 namespace Portal.Patient.Services;
 
@@ -37,42 +39,43 @@ public abstract class BaseService<T> : IIdentifiedService<T>
         }
     }
 
-    //public IEnumerable<T> GetForCurrentUser()
-    //{
-    //    //TODO: pull from API
+    public virtual async Task<IEnumerable<T>> GetAll()
+    {
+        using (var client = _clientFactory.CreateClient("genericClientFactory"))
+        {
+            var getResult = await client.GetAsync($"{_controllerRoute}/get");
+            if (!getResult.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException(await getResult.Content.ReadAsStringAsync(), new Exception(getResult.ReasonPhrase), getResult.StatusCode);
+            }
+            var body = await getResult.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<IEnumerable<T>>(body);
+        }
+    }
 
-    //    using (var client = _clientFactory.CreateClient())
-    //    {
-    //    }
-    //    return new List<T>() {
-    //         new Notification {
-    //             NotificationTypeID = (int)NotificationTypeID.RecommendedIntervention,
-    //             Message = "You have new recommended interventions. Click here to view more information."
-    //         }
-    //     };
-    //}
-
-    public async virtual Task<bool> Put(T entity)
+    public virtual async Task<bool> Put(T entity)
     {
         var wasSuccessful = false;
+        var putContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
+
         using (var client = _clientFactory.CreateClient())
         {
-            //var tokenResponse = await client.PostAsync($"{_baseUri}", ));
+            var response = await client.PutAsync($"{_controllerRoute}/put", putContent);
+            wasSuccessful = response.IsSuccessStatusCode;
         }
+
         return wasSuccessful;
     }
 
-    //public async Task Subscribe()
-    //{
-    //    var subscription = await _JSRuntime.InvokeAsync<NotificationSubscription>("blazorPushNotifications.requestSubscription");
+    public virtual async Task<bool> Delete(string id)
+    {
+        var wasSuccessful = false;
 
-
-    //    if (subscription is not null)
-    //    {
-    //        // TODO store this user id.
-    //        subscription.UserId = Guid.NewGuid().ToString();
-
-    //        // TODO send subscription to server. 
-    //    }
-    //}
+        using (var client = _clientFactory.CreateClient())
+        {
+            var response = await client.DeleteAsync($"{_controllerRoute}/delete/{id}");
+            wasSuccessful = response.IsSuccessStatusCode;
+        }
+        return wasSuccessful;
+    }
 }
