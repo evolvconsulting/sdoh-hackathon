@@ -18,6 +18,7 @@ namespace Portal.Patient
             builder.Services.AddMudServices();
             builder.Services.AddSingleton<IIdentifiedService<Notification>, NotificationService>();
             builder.Services.AddSingleton<IIdentifiedService<Intervention>, InterventionService>();
+            builder.Services.AddSingleton<IPatientRelatedService<PatientIntervention>, PatientInterventionService>();
 
 
             builder.Services.AddHttpClient(
@@ -25,7 +26,7 @@ namespace Portal.Patient
                 client =>
                 {
                     // Set the base address of the named client.
-                    client.BaseAddress = new Uri("https://localhost:7011/");
+                    client.BaseAddress = new Uri("https://localhost:56786");
 
                 });
 

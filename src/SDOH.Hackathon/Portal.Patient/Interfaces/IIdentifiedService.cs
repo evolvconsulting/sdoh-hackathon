@@ -1,4 +1,6 @@
 ﻿using Data.Interfaces;
+using Data.Models;
+
 namespace Portal.Patient.Interfaces;
 
 public interface IIdentifiedService<T>
@@ -6,4 +8,6 @@ public interface IIdentifiedService<T>
 {
     //public IEnumerable<INotification> GetForCurrentUser();
     public Task<T> Get(string id);
+    public Task<bool> Put(T obj);
+
 }

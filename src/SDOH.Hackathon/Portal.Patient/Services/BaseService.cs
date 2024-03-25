@@ -16,7 +16,7 @@ public abstract class BaseService<T> : IIdentifiedService<T>
     where T : class, IIdentified
 {
     private readonly IJSRuntime _JSRuntime;
-    private IHttpClientFactory _clientFactory;
+    protected IHttpClientFactory _clientFactory;
     protected readonly string _controllerRoute;
 
     public BaseService(IJSRuntime JSRuntime, IHttpClientFactory clientFactory, string controllerRoute)
@@ -42,6 +42,7 @@ public abstract class BaseService<T> : IIdentifiedService<T>
         }
     }
 
+
     //public IEnumerable<T> GetForCurrentUser()
     //{
     //    //TODO: pull from API
@@ -65,7 +66,7 @@ public abstract class BaseService<T> : IIdentifiedService<T>
         var jsonContent = JsonConvert.SerializeObject(entity);
         var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-        using (var client = _clientFactory.CreateClient())
+        using (var client = _clientFactory.CreateClient("genericClientFactory"))
         { 
             var endpointUrl = $"{_controllerRoute}/put";
            
