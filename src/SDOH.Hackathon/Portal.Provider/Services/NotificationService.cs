@@ -3,7 +3,7 @@
 namespace Portal.Provider.Services;
 
 
-public class NotificationService : BaseService<Notification>
+public class NotificationService : PatientRelatedService<Notification>
 {
     public NotificationService(IHttpClientFactory clientFactory) : base(clientFactory, "notifications")
     {
