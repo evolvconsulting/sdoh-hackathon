@@ -9,7 +9,6 @@ namespace DataServices.Services;
 
 public abstract class BaseService<T> : IIdentifiedService<T>
     where T : class, IIdentified
-
 {
     protected IHttpClientFactory _clientFactory;
     protected readonly string _controllerRoute;
