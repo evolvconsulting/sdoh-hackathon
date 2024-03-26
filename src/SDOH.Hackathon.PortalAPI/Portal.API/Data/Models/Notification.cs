@@ -2,7 +2,7 @@
 
 namespace Data.Models;
 
-public partial class Notification : IIdentified
+public partial class Notification : IIdentified, IPatientRelated
 {
     public string Id { get; set; } = null!;
 

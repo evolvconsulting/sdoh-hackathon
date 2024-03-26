@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Data.Models;
 
-public partial class PatientRiskLevel : IIdentified
+public partial class PatientRiskLevel : IIdentified, IPatientRelated
 {
     public string Id { get; set; } = null!;
 

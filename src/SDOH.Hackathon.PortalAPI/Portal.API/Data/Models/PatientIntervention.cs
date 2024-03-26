@@ -2,7 +2,7 @@
 
 namespace Data.Models;
 
-public partial class PatientIntervention : IIdentified
+public partial class PatientIntervention : IIdentified, IPatientRelated
 {
     public string Id { get; set; } = null!;
 
