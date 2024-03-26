@@ -7,6 +7,11 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
+//todo
+//if (builder.Environment.IsDevelopment())
+//{
+
+//}
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
