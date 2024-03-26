@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Portal.Provider.Interfaces;
 using Portal.Provider.Services;
+using Data.Models;
 
 namespace Portal.Provider.Pages;
 
@@ -10,17 +11,17 @@ public partial class PatientDetails : ComponentBase
     public string Id { get; set; }
 
     private const string PageName = "Patient Details";
-    private ViewModels.Patient currentPatient { get; set; }
+    private Patient currentPatient { get; set; }
 
     [Inject]
-    public IDataService<ViewModels.Patient> PatientService { get; set; }
+    private IIdentifiedService<Patient> _patientService { get; set; }
 
     [Inject]
     public AppBarService AppBarService { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        currentPatient = PatientService.GetById(Id);
+        currentPatient = await _patientService.Get(Id);
         AppBarService.SetSettings(PageName, true, "/patients");
     }
 }
