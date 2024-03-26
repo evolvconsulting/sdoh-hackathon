@@ -1,7 +1,8 @@
 ﻿namespace Portal.Provider.Pages;
 
 using Microsoft.AspNetCore.Components;
-using Portal.Provider.Interfaces;
+using DataServices.Interfaces;
+using DataServices.Services;
 using Portal.Provider.Services;
 
 public partial class Patients

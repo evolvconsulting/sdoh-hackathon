@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
+using Portal.Provider.Services;
 using DataServices.Interfaces;
 using DataServices.Services;
 using Data.Models;
@@ -18,7 +19,7 @@ public class Program
 
         builder.Services.AddMudServices();
 
-        //builder.Services.AddSingleton<AppBarService>();
+        builder.Services.AddSingleton<AppBarService>();
         builder.Services.AddSingleton<IIdentifiedService<Patient>, PatientService>();
         builder.Services.AddSingleton<IIdentifiedService<NotificationType>, NotificationTypeService>();
         builder.Services.AddSingleton<IIdentifiedService<PatientInterventionNotification>, PatientInterventionNotificationService>();
