@@ -19,6 +19,7 @@ builder.Services.AddCors(options =>
                                 "https://localhost:7217",
                                 "https://localhost:44362",//frontend
                                 "https://localhost:7011",
+                                "https://localhost:5000",
                                 "https://localhost:56787") //backend aka this
                                 .AllowAnyMethod().AllowAnyHeader();
         });
