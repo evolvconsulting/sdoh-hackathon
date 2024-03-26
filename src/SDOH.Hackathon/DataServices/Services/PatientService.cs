@@ -1,4 +1,4 @@
-﻿namespace Portal.Provider.Services;
+﻿namespace DataServices.Services;
 
 public class PatientService : BaseService<Data.Models.Patient>
 {

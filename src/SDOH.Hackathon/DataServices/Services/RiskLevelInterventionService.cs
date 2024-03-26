@@ -1,4 +1,4 @@
-﻿namespace Portal.Provider.Services;
+﻿namespace DataServices.Services;
 
 public class RiskLevelInterventionService : BaseService<Data.Models.RiskLevelIntervention>
 {

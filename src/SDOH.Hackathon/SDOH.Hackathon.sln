@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\SDOH.Hackathon.PortalAPI\Portal.API\Data\Data.csproj", "{60942CFF-E2B2-419D-86FB-EF956235176B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portal.API", "..\SDOH.Hackathon.PortalAPI\Portal.API\Api\Portal.API.csproj", "{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataServices", "DataServices\DataServices.csproj", "{80971DEA-0F00-4B05-AAA8-6622804034EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,7 +35,10 @@ Global
 		{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84E5523C-3ECC-4A46-9CDE-A28F0AAC1B16}.Release|Any CPU.Build.0 = Release|Any CPU
-
+		{80971DEA-0F00-4B05-AAA8-6622804034EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80971DEA-0F00-4B05-AAA8-6622804034EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80971DEA-0F00-4B05-AAA8-6622804034EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80971DEA-0F00-4B05-AAA8-6622804034EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

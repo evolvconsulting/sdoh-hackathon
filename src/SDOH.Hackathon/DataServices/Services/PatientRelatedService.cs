@@ -1,14 +1,14 @@
-﻿using Microsoft.JSInterop;
-using MudBlazor;
-using Portal.Provider.Interfaces;
-using Data.Models;
-using Newtonsoft.Json;
+﻿using Data.Models;
 using Data.Interfaces;
+using DataServices.Interfaces;
+using Newtonsoft.Json;
+using System.Text;
+using System.Net.Http;
 
-namespace Portal.Provider.Services;
+namespace DataServices.Services;
 
 public abstract class PatientRelatedService<T> : BaseService<T>, IPatientRelatedService<T>
-    where T : class, IIdentified
+    where T : class, IIdentified, IPatientRelated
 {
     public PatientRelatedService(IHttpClientFactory clientFactory, string controllerRoute) : base(clientFactory, controllerRoute)
     {
@@ -25,7 +25,7 @@ public abstract class PatientRelatedService<T> : BaseService<T>, IPatientRelated
                 //return StatusCode((int)tokenResponse.StatusCode, await tokenResponse.Content.ReadAsStringAsync());
             }
             var body = await getResult.Content.ReadAsStringAsync();
-            var entity = (JsonConvert.DeserializeObject<IEnumerable<T>>(body));
+            var entity = JsonConvert.DeserializeObject<IEnumerable<T>>(body);
             return entity;
         }
     }

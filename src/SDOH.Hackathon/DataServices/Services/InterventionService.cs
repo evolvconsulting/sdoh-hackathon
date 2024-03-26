@@ -1,6 +1,7 @@
-﻿using Data.Models;
+using Data.Models;
+using System.Net.Http;
 
-namespace Portal.Provider.Services;
+namespace DataServices.Services;
 
 public class InterventionService : BaseService<Intervention>
 {

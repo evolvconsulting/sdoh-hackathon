@@ -1,4 +1,4 @@
-﻿namespace Portal.Provider.Services;
+﻿namespace DataServices.Services;
 
 public class NotificationTypeService : BaseService<Data.Models.NotificationType>
 {

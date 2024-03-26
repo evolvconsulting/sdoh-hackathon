@@ -1,4 +1,4 @@
-﻿namespace Portal.Provider.Services;
+﻿namespace DataServices.Services;
 
 public class PatientInterventionNotificationService : BaseService<Data.Models.PatientInterventionNotification>
 {

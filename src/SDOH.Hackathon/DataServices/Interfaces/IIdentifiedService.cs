@@ -1,5 +1,7 @@
 ﻿using Data.Interfaces;
-namespace Portal.Provider.Interfaces;
+using Data.Models;
+
+namespace DataServices.Interfaces;
 
 public interface IIdentifiedService<T>
         where T : class, IIdentified

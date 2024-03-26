@@ -1,12 +1,15 @@
-﻿using Portal.Provider.Interfaces;
+using Data.Models;
 using Data.Interfaces;
+using DataServices.Interfaces;
 using Newtonsoft.Json;
 using System.Text;
+using System.Net.Http;
+namespace DataServices.Services;
 
-namespace Portal.Provider.Services;
 
 public abstract class BaseService<T> : IIdentifiedService<T>
     where T : class, IIdentified
+
 {
     protected IHttpClientFactory _clientFactory;
     protected readonly string _controllerRoute;
@@ -21,7 +24,6 @@ public abstract class BaseService<T> : IIdentifiedService<T>
     {
         using (var client = _clientFactory.CreateClient("genericClientFactory"))
         {
-            Console.WriteLine($"Route: {_controllerRoute} ID: {id}");
             var getResult = await client.GetAsync($"{_controllerRoute}/get/{id}");
             if (!getResult.IsSuccessStatusCode)
             {
@@ -29,8 +31,7 @@ public abstract class BaseService<T> : IIdentifiedService<T>
                 //return StatusCode((int)tokenResponse.StatusCode, await tokenResponse.Content.ReadAsStringAsync());
             }
             var body = await getResult.Content.ReadAsStringAsync();
-            var entity = (JsonConvert.DeserializeObject<T>(body));
-
+            var entity = JsonConvert.DeserializeObject<T>(body);
             return entity;
         }
     }
@@ -44,6 +45,7 @@ public abstract class BaseService<T> : IIdentifiedService<T>
             {
                 throw new HttpRequestException(await getResult.Content.ReadAsStringAsync(), new Exception(getResult.ReasonPhrase), getResult.StatusCode);
             }
+
             var body = await getResult.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<T>>(body);
         }
@@ -59,19 +61,18 @@ public abstract class BaseService<T> : IIdentifiedService<T>
             var response = await client.PutAsync($"{_controllerRoute}/put", putContent);
             wasSuccessful = response.IsSuccessStatusCode;
         }
-
         return wasSuccessful;
     }
 
     public virtual async Task<bool> Delete(string id)
     {
         var wasSuccessful = false;
-
         using (var client = _clientFactory.CreateClient())
         {
             var response = await client.DeleteAsync($"{_controllerRoute}/delete/{id}");
             wasSuccessful = response.IsSuccessStatusCode;
         }
+
         return wasSuccessful;
     }
 }
