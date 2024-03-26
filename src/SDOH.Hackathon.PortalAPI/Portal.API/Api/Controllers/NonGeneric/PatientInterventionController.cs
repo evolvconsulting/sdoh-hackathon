@@ -10,7 +10,7 @@ namespace Portal.API.Controllers.NonGeneric
         public PatientInterventionController(ScaffoldedContext context, IConfiguration configuration) : base(context, configuration) { }
 
         [HttpGet]
-        [Route("getByPatient/{patientId}")]
+        [Route("get-by-patient/{patientId}")]
         [ProducesResponseType<object>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Authorize(Policy="default-api-access")]
