@@ -8,7 +8,7 @@ namespace Portal.Provider.Services;
 public abstract class BaseService<T> : IIdentifiedService<T>
     where T : class, IIdentified
 {
-    private IHttpClientFactory _clientFactory;
+    protected IHttpClientFactory _clientFactory;
     protected readonly string _controllerRoute;
 
     public BaseService(IHttpClientFactory clientFactory, string controllerRoute)
