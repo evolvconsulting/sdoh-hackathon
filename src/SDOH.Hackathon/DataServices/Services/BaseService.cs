@@ -56,7 +56,7 @@ public abstract class BaseService<T> : IIdentifiedService<T>
         var wasSuccessful = false;
         var putContent = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
 
-        using (var client = _clientFactory.CreateClient())
+        using (var client = _clientFactory.CreateClient("genericClientFactory"))
         {
             var response = await client.PutAsync($"{_controllerRoute}/put", putContent);
             wasSuccessful = response.IsSuccessStatusCode;
@@ -67,7 +67,7 @@ public abstract class BaseService<T> : IIdentifiedService<T>
     public virtual async Task<bool> Delete(string id)
     {
         var wasSuccessful = false;
-        using (var client = _clientFactory.CreateClient())
+        using (var client = _clientFactory.CreateClient("genericClientFactory"))
         {
             var response = await client.DeleteAsync($"{_controllerRoute}/delete/{id}");
             wasSuccessful = response.IsSuccessStatusCode;
